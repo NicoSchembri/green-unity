@@ -8,7 +8,7 @@ public class CharacterMovement_HoldJump : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float maxJumpForce = 24f; // double the jump force
-    public float jumpBuildSpeed = 5f; // rate at which jump increases per second
+    public float jumpBuildSpeed = 5f; // rate at which jump increases per second.
 
     [Header("Ground Detection")]
     public LayerMask groundLayer;
