@@ -112,7 +112,7 @@ public class Enemy_BAF : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Goomba squashed!");
+        Debug.Log("dawg got squashed!");
         Destroy(gameObject);
     }
 

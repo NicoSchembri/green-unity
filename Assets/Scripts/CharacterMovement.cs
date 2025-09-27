@@ -19,6 +19,10 @@ public class CharacterMovement : MonoBehaviour
     public int currentHearts = 5;
     public HeartsUI heartsUI;
 
+    [Header("Fireball Settings")]
+    public GameObject fireballPrefab;
+    public Transform firePoint;
+
     private Rigidbody2D rb;
     private Collider2D col;
     private bool isGrounded;
@@ -27,13 +31,15 @@ public class CharacterMovement : MonoBehaviour
     private bool isJumping;
     private Vector3 spawnPoint;
 
+    private bool facingRight = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        spawnPoint = transform.position; // saving the spawn start to use for respawn
+        spawnPoint = transform.position; // saving spawn point
 
         if (col.sharedMaterial == null)
         {
@@ -54,6 +60,7 @@ public class CharacterMovement : MonoBehaviour
         else
             coyoteCounter -= Time.deltaTime;
 
+        // Jump input
         if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -67,18 +74,61 @@ public class CharacterMovement : MonoBehaviour
             jumpHeld = false;
             isJumping = false;
         }
+
+        // Fireball input
+        if (Input.GetKeyDown(KeyCode.E) && fireballPrefab != null && firePoint != null)
+        {
+            ShootFireball();
+        }
     }
 
     void FixedUpdate()
     {
+        // Horizontal movement
         float move = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
 
+        // Flip character if moving in opposite direction
+        if (move > 0 && !facingRight)
+            Flip();
+        else if (move < 0 && facingRight)
+            Flip();
+
+        // Build jump force while holding jump
         if (jumpHeld && isJumping)
         {
             float newVelocityY = rb.linearVelocity.y + jumpBuildSpeed * Time.fixedDeltaTime;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(newVelocityY, maxJumpForce));
         }
+    }
+
+    private void ShootFireball()
+    {
+        if (fireballPrefab == null || firePoint == null)
+            return;
+
+        GameObject fireballObj = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+        Fireball fireball = fireballObj.GetComponent<Fireball>();
+        if (fireball == null)
+            return;
+
+        float dir = facingRight ? 1f : -1f;
+        fireball.Launch(new Vector2(dir, 0f));
+
+        // Flip fireball visually to match direction
+        Vector3 scale = fireballObj.transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * dir;
+        fireballObj.transform.localScale = scale;
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+
+        // Flip player sprite
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -116,8 +166,6 @@ public class CharacterMovement : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHearts = Mathf.Max(0, currentHearts - amount);
-        Debug.Log("Took " + amount + " damage. Current hearts: " + currentHearts);
-
         if (heartsUI != null)
             heartsUI.UpdateHearts(currentHearts);
 
@@ -128,8 +176,6 @@ public class CharacterMovement : MonoBehaviour
     public void Heal(int amount)
     {
         currentHearts = Mathf.Min(maxHearts, currentHearts + amount);
-        Debug.Log("Healed " + amount + " heart(s). Current hearts: " + currentHearts);
-
         if (heartsUI != null)
             heartsUI.UpdateHearts(currentHearts);
     }
@@ -143,20 +189,16 @@ public class CharacterMovement : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Character died!");
         transform.position = spawnPoint;
         rb.linearVelocity = Vector2.zero;
 
-        // Reset health
         currentHearts = maxHearts;
         if (heartsUI != null)
             heartsUI.UpdateHearts(currentHearts);
 
-        // Reset jump and movement state
         isGrounded = false;
         isJumping = false;
         jumpHeld = false;
         coyoteCounter = coyoteTime;
     }
 }
-    
