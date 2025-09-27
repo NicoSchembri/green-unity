@@ -2,17 +2,22 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class CharacterMovement_HoldJump : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
-    public float maxJumpForce = 24f; // double the jump force
-    public float jumpBuildSpeed = 5f; // rate at which jump increases per second.
+    public float maxJumpForce = 24f;
+    public float jumpBuildSpeed = 5f;
 
     [Header("Ground Detection")]
     public LayerMask groundLayer;
     public float coyoteTime = 0.1f;
+
+    [Header("Health")]
+    public int maxHearts = 5;
+    public int currentHearts = 5;
+    public HeartsUI heartsUI;
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -20,6 +25,7 @@ public class CharacterMovement_HoldJump : MonoBehaviour
     private float coyoteCounter;
     private bool jumpHeld;
     private bool isJumping;
+    private Vector3 spawnPoint;
 
     void Start()
     {
@@ -27,7 +33,8 @@ public class CharacterMovement_HoldJump : MonoBehaviour
         col = GetComponent<Collider2D>();
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        // Zero friction to prevent side sticking
+        spawnPoint = transform.position; // saving the spawn start to use for respawn
+
         if (col.sharedMaterial == null)
         {
             PhysicsMaterial2D noFriction = new PhysicsMaterial2D("NoFriction");
@@ -35,17 +42,18 @@ public class CharacterMovement_HoldJump : MonoBehaviour
             noFriction.bounciness = 0f;
             col.sharedMaterial = noFriction;
         }
+
+        if (heartsUI != null)
+            heartsUI.UpdateHearts(currentHearts);
     }
 
     void Update()
     {
-        // Update coyote timer
         if (isGrounded)
             coyoteCounter = coyoteTime;
         else
             coyoteCounter -= Time.deltaTime;
 
-        // Start jump
         if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -54,7 +62,6 @@ public class CharacterMovement_HoldJump : MonoBehaviour
             coyoteCounter = 0f;
         }
 
-        // Detect release of jump button
         if (Input.GetButtonUp("Jump"))
         {
             jumpHeld = false;
@@ -64,11 +71,9 @@ public class CharacterMovement_HoldJump : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Horizontal movement
         float move = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
 
-        // Variable jump while holding
         if (jumpHeld && isJumping)
         {
             float newVelocityY = rb.linearVelocity.y + jumpBuildSpeed * Time.fixedDeltaTime;
@@ -107,4 +112,51 @@ public class CharacterMovement_HoldJump : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(int amount)
+    {
+        currentHearts = Mathf.Max(0, currentHearts - amount);
+        Debug.Log("Took " + amount + " damage. Current hearts: " + currentHearts);
+
+        if (heartsUI != null)
+            heartsUI.UpdateHearts(currentHearts);
+
+        if (currentHearts <= 0)
+            Die();
+    }
+
+    public void Heal(int amount)
+    {
+        currentHearts = Mathf.Min(maxHearts, currentHearts + amount);
+        Debug.Log("Healed " + amount + " heart(s). Current hearts: " + currentHearts);
+
+        if (heartsUI != null)
+            heartsUI.UpdateHearts(currentHearts);
+    }
+
+    public void Bounce(float bounceForce)
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
+        isJumping = true;
+        jumpHeld = false;
+    }
+
+    private void Die()
+    {
+        Debug.Log("Character died!");
+        transform.position = spawnPoint;
+        rb.linearVelocity = Vector2.zero;
+
+        // Reset health
+        currentHearts = maxHearts;
+        if (heartsUI != null)
+            heartsUI.UpdateHearts(currentHearts);
+
+        // Reset jump and movement state
+        isGrounded = false;
+        isJumping = false;
+        jumpHeld = false;
+        coyoteCounter = coyoteTime;
+    }
 }
+    
