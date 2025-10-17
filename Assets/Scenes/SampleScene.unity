@@ -194,6 +194,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224207664}
   m_CullTransparentMesh: 1
+--- !u!1 &322048044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322048045}
+  m_Layer: 0
+  m_Name: MouthPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &322048045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322048044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.22, y: 1.19, z: 0}
+  m_LocalScale: {x: 1, y: 1.475, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1153268495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &353125579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1471,7 @@ GameObject:
   - component: {fileID: 1153268491}
   - component: {fileID: 1153268496}
   - component: {fileID: 1153268497}
+  - component: {fileID: 1153268498}
   m_Layer: 0
   m_Name: MainCharacter
   m_TagString: Player
@@ -1470,6 +1502,19 @@ MonoBehaviour:
   maxHearts: 5
   currentHearts: 5
   heartsUI: {fileID: 2125028038}
+  fireballPrefab: {fileID: 8679725442693165356, guid: 6d8634d52e8ba2946a9515932dd086c9, type: 3}
+  firePoint: {fileID: 1269173405}
+  idleSprite: {fileID: -6708026062864206151, guid: 32c144834628fe641badafe50f7cd708, type: 3}
+  jumpSprite: {fileID: 917049934227455710, guid: c75e71901ff64a04091774e039e4d07e, type: 3}
+  runSprites:
+  - {fileID: 6942178957828106412, guid: 40f4be49cefb83a488b09c866c0ce60d, type: 3}
+  - {fileID: -1064317457629405261, guid: 404bbd978423d7541953c1bf2d3203ad, type: 3}
+  - {fileID: 2659831942388956241, guid: 900914dc11a9d804ba9da8d8f349f7c9, type: 3}
+  - {fileID: -3743462528116230646, guid: a71b0b56f8b9d6e438687be5f289ce17, type: 3}
+  - {fileID: 4179142047126900082, guid: 3331a42fd2dd86d42ba31892fe62ccd7, type: 3}
+  - {fileID: 917049934227455710, guid: c75e71901ff64a04091774e039e4d07e, type: 3}
+  - {fileID: 6481886674291061735, guid: b47c1f2b5e18fc44b85520cba554269a, type: 3}
+  frameRate: 0.1
 --- !u!61 &1153268492
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1613,7 +1658,9 @@ Transform:
   m_LocalPosition: {x: -7.82, y: -2.76, z: 0}
   m_LocalScale: {x: 0.23986, y: 0.23986, z: 0.23986}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1269173405}
+  - {fileID: 322048045}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1153268496
@@ -1628,8 +1675,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f27dfa85b3e5243afef54780d3e463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrappleTongue
-  grappleForce: 100
+  mouthPoint: {fileID: 322048045}
+  grappleForce: 80
   stopDistance: 0.05
+  extendSpeed: 17
+  retractSpeed: 24
+  maxLength: 10
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1743,6 +1794,59 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!95 &1153268498
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153268490}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1fcc1d7bdf038144f878cd26327aff8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1269173404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1269173405}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1269173405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269173404}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.24, y: 1.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1153268495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1319843510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1861,7 @@ GameObject:
   - component: {fileID: 1319843514}
   - component: {fileID: 1319843513}
   m_Layer: 0
-  m_Name: Bug
+  m_Name: Snake
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1810,7 +1914,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 404588223363988752, guid: c31a8f3a3dfd6774c8ecaa4d03784a8e, type: 3}
+  m_Sprite: {fileID: -8039099792665916196, guid: 34bad80d76154584eaab78079c184efd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1830,8 +1934,8 @@ Transform:
   m_GameObject: {fileID: 1319843510}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.482, y: -2.335, z: 0}
-  m_LocalScale: {x: 0.25962335, y: 0.25962335, z: 0.25962335}
+  m_LocalPosition: {x: 5.482, y: -2.906, z: 0}
+  m_LocalScale: {x: 0.12540892, y: 0.12540892, z: 0.12540892}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1894,13 +1998,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.27, y: 4.03}
+    oldSize: {x: 13.43, y: 9.68}
     newSize: {x: 4.27, y: 4.03}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.69, y: 4.21}
+  m_Size: {x: 14.43, y: 10.18}
   m_EdgeRadius: 0
 --- !u!50 &1319843515
 Rigidbody2D:
@@ -2226,7 +2330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

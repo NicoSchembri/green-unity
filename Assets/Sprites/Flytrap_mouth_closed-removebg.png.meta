@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06153107d3fed4b4f869b3d195f21711
+guid: 45517159ee51b7d43b8096581d2381d6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4918510089527227086
-    second: FrogHeart_0
+      213: -7293537469564221507
+    second: Flytrap_mouth_closed-removebg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FrogHeart_0
+      name: Flytrap_mouth_closed-removebg_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1200
-        height: 1600
+        x: 38
+        y: 98
+        width: 366
+        height: 380
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 23d0e890221fdbbb0800000000000000
-      internalID: -4918510089527227086
+      spriteID: db78f92705628ca90800000000000000
+      internalID: -7293537469564221507
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FrogHeart_0: -4918510089527227086
+      Flytrap_mouth_closed-removebg_0: -7293537469564221507
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
