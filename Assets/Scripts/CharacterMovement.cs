@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -23,8 +24,16 @@ public class CharacterMovement : MonoBehaviour
     public GameObject fireballPrefab;
     public Transform firePoint;
 
+    [Header("Animation Frames")]
+    public Sprite idleSprite;
+    public Sprite jumpSprite;
+    public Sprite[] runSprites;
+    public float frameRate = 0.1f;
+
     private Rigidbody2D rb;
     private Collider2D col;
+    private SpriteRenderer sr;
+
     private bool isGrounded;
     private float coyoteCounter;
     private bool jumpHeld;
@@ -33,13 +42,18 @@ public class CharacterMovement : MonoBehaviour
 
     private bool facingRight = true;
 
+    // Animation control
+    private float frameTimer;
+    private int frameIndex;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        sr = GetComponent<SpriteRenderer>();
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        spawnPoint = transform.position; // saving spawn point
+        spawnPoint = transform.position;
 
         if (col.sharedMaterial == null)
         {
@@ -51,6 +65,8 @@ public class CharacterMovement : MonoBehaviour
 
         if (heartsUI != null)
             heartsUI.UpdateHearts(currentHearts);
+
+        sr.sprite = idleSprite;
     }
 
     void Update()
@@ -84,11 +100,10 @@ public class CharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Horizontal movement
         float move = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
 
-        // Flip character if moving in opposite direction
+        // Flip sprite
         if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
@@ -99,6 +114,37 @@ public class CharacterMovement : MonoBehaviour
         {
             float newVelocityY = rb.linearVelocity.y + jumpBuildSpeed * Time.fixedDeltaTime;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(newVelocityY, maxJumpForce));
+        }
+
+        // Update which sprite to show
+        UpdateSpriteAnimation(move);
+    }
+
+    private void UpdateSpriteAnimation(float move)
+    {
+        bool running = Mathf.Abs(move) > 0.1f;
+
+        if (!isGrounded)
+        {
+            sr.sprite = jumpSprite;
+            return;
+        }
+
+        if (running)
+        {
+            frameTimer += Time.fixedDeltaTime;
+            if (frameTimer >= frameRate)
+            {
+                frameTimer = 0f;
+                frameIndex = (frameIndex + 1) % runSprites.Length;
+                sr.sprite = runSprites[frameIndex];
+            }
+        }
+        else
+        {
+            sr.sprite = idleSprite;
+            frameTimer = 0f;
+            frameIndex = 0;
         }
     }
 
@@ -115,7 +161,6 @@ public class CharacterMovement : MonoBehaviour
         float dir = facingRight ? 1f : -1f;
         fireball.Launch(new Vector2(dir, 0f));
 
-        // Flip fireball visually to match direction
         Vector3 scale = fireballObj.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * dir;
         fireballObj.transform.localScale = scale;
@@ -124,8 +169,6 @@ public class CharacterMovement : MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-
-        // Flip player sprite
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;

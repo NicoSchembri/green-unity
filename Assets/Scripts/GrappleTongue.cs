@@ -1,52 +1,127 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(LineRenderer))]
 public class GrappleTongue : MonoBehaviour
 {
+    [Header("Tongue Origin")]
+    public Transform mouthPoint;          // Works like firePoint — attach under player sprite
+
     [Header("Grapple Settings")]
-    public float grappleForce = 130f;   
+    public float grappleForce = 130f;
     public float stopDistance = 0.5f;
+    public float extendSpeed = 25f;
+    public float retractSpeed = 35f;
+    public float maxLength = 10f;
 
     [Header("Layer Mask")]
-    public LayerMask groundLayer;      
+    public LayerMask groundLayer;
 
     private Rigidbody2D rb;
     private LineRenderer line;
-
     private Vector2 grapplePoint;
     private bool isGrappling = false;
-    private bool straightLine = false;
+    private bool extending = false;
+    private bool retracting = false;
 
-    private float waveProgress = 0f;
+    private float currentLength = 0f;
+    private Coroutine tongueRoutine;
+
+    private Vector3 originalMouthLocalPos;
+    private bool facingRight = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         line = GetComponent<LineRenderer>();
         line.positionCount = 0;
+
+        if (mouthPoint != null)
+            originalMouthLocalPos = mouthPoint.localPosition;
     }
 
     void Update()
     {
-        // Start grapple
+        // Flip mouthPoint to match facing direction
+        if (transform.localScale.x > 0 && !facingRight)
+            FlipMouthPoint(true);
+        else if (transform.localScale.x < 0 && facingRight)
+            FlipMouthPoint(false);
+
+        // Fire tongue
         if (Input.GetMouseButtonDown(0))
         {
+            Vector2 mouthPos = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = mouseWorldPos - (Vector2)transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, Mathf.Infinity, groundLayer);
+            Vector2 direction = mouseWorldPos - mouthPos;
 
-            if (hit.collider != null)
-            {
-                StartGrapple(hit.point);
-            }
+            RaycastHit2D hit = Physics2D.Raycast(mouthPos, direction.normalized, maxLength, groundLayer);
+            Vector2 target = (hit.collider != null) ? hit.point : mouthPos + direction.normalized * maxLength;
+
+            if (tongueRoutine != null)
+                StopCoroutine(tongueRoutine);
+
+            tongueRoutine = StartCoroutine(ExtendTongue(target, hit.collider != null));
         }
 
-        // Release grapple
+        // Release tongue
         if (Input.GetMouseButtonUp(0))
-        {
             StopGrapple();
+    }
+
+    private IEnumerator ExtendTongue(Vector2 target, bool hitSomething)
+    {
+        isGrappling = false;
+        extending = true;
+        retracting = false;
+
+        line.positionCount = 2;
+        currentLength = 0f;
+
+        Vector2 start = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
+        float totalDist = Vector2.Distance(start, target);
+
+        while (currentLength < totalDist)
+        {
+            currentLength += extendSpeed * Time.deltaTime;
+            Vector2 tip = Vector2.Lerp(start, target, currentLength / totalDist);
+            DrawTongue(start, tip);
+            yield return null;
         }
+
+        extending = false;
+
+        if (hitSomething)
+        {
+            isGrappling = true;
+            grapplePoint = target;
+        }
+        else
+        {
+            tongueRoutine = StartCoroutine(RetractTongue());
+        }
+    }
+
+    private IEnumerator RetractTongue()
+    {
+        retracting = true;
+
+        Vector2 start = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
+        Vector2 end = line.GetPosition(1);
+        float totalDist = Vector2.Distance(start, end);
+        float retractProgress = 0f;
+
+        while (retractProgress < 1f)
+        {
+            retractProgress += (retractSpeed / totalDist) * Time.deltaTime;
+            Vector2 tip = Vector2.Lerp(end, start, retractProgress);
+            DrawTongue(start, tip);
+            yield return null;
+        }
+
+        retracting = false;
+        StopGrapple();
     }
 
     void FixedUpdate()
@@ -58,66 +133,45 @@ public class GrappleTongue : MonoBehaviour
 
             if (distance > stopDistance)
             {
-                // Apply pulling force toward grapple point
                 rb.AddForce(toTarget.normalized * grappleForce);
             }
             else
             {
-                StopGrapple();
+                tongueRoutine = StartCoroutine(RetractTongue());
             }
         }
     }
 
     void LateUpdate()
     {
-        if (isGrappling)
+        if (line.positionCount > 0 && !extending && !retracting)
         {
-            if (straightLine)
-            {
-                line.positionCount = 2;
-                line.SetPosition(0, transform.position);
-                line.SetPosition(1, grapplePoint);
-            }
-            else
-            {
-                waveProgress += Time.deltaTime * 5f;
-                DrawWavyRope();
-            }
+            Vector2 start = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
+            DrawTongue(start, isGrappling ? grapplePoint : line.GetPosition(1));
         }
     }
 
-    void StartGrapple(Vector2 target)
+    private void DrawTongue(Vector2 start, Vector2 end)
     {
-        grapplePoint = target;
-        isGrappling = true;
-        straightLine = true;
-        waveProgress = 0f;
-        line.positionCount = 2;
+        line.SetPosition(0, start);
+        line.SetPosition(1, end);
     }
 
     void StopGrapple()
     {
         isGrappling = false;
-        straightLine = false;
-        waveProgress = 0f;
+        extending = false;
+        retracting = false;
         line.positionCount = 0;
     }
 
-    void DrawWavyRope()
+    private void FlipMouthPoint(bool nowFacingRight)
     {
-        int segments = 20;
-        line.positionCount = segments;
+        facingRight = nowFacingRight;
+        if (mouthPoint == null) return;
 
-        for (int i = 0; i < segments; i++)
-        {
-            float t = i / (float)(segments - 1);
-            Vector2 point = Vector2.Lerp(transform.position, grapplePoint, t);
-            float wave = Mathf.Sin(t * Mathf.PI * 2f + waveProgress) * 0.1f;
-
-            Vector2 perpendicular = Vector2.Perpendicular((grapplePoint - (Vector2)transform.position).normalized);
-            Vector2 offset = perpendicular * wave;
-
-            line.SetPosition(i, point + offset);
-        }
+        Vector3 pos = originalMouthLocalPos;
+        pos.x *= nowFacingRight ? 1 : -1;
+        mouthPoint.localPosition = pos;
     }
 }
