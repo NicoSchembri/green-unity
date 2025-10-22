@@ -24,7 +24,6 @@ public class VenusFlyTrap : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Start with the open sprite
         if (openSprite != null)
             spriteRenderer.sprite = openSprite;
 
@@ -49,14 +48,12 @@ public class VenusFlyTrap : MonoBehaviour
 
         yield return new WaitForSeconds(closeDelay);
 
-        // Close trap
         isClosed = true;
         isClosing = false;
 
         if (closedSprite != null)
             spriteRenderer.sprite = closedSprite;
 
-        // Damage player if still on
         if (player != null && topTriggerCollider != null)
         {
             Collider2D playerCollider = player.GetComponent<Collider2D>();
@@ -68,10 +65,7 @@ public class VenusFlyTrap : MonoBehaviour
             }
         }
 
-        // Wait before reopening
         yield return new WaitForSeconds(reopenDelay);
-
-        // Reopen trap
         isClosed = false;
         if (openSprite != null)
             spriteRenderer.sprite = openSprite;

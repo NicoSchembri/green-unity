@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8318510328065934757}
   m_Layer: 3
   m_Name: Flytrap
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 2528062056941762522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.01, y: -2.53, z: 0}
-  m_LocalScale: {x: 0.18683, y: 0.18683, z: 0.18683}
+  m_LocalPosition: {x: -13.291, y: -2.16, z: 0}
+  m_LocalScale: {x: 0.31729338, y: 0.31729338, z: 0.31729338}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8705580174262303065}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 3786824824044248344, guid: 1548a9c5219655544a49991b9146dcea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -177,7 +177,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.875, y: 4.86}
+    oldSize: {x: 7.75, y: 9.72}
     newSize: {x: 7.75, y: 9.72}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

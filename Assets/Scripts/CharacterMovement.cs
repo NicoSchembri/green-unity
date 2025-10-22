@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -42,7 +43,6 @@ public class CharacterMovement : MonoBehaviour
 
     private bool facingRight = true;
 
-    // Animation control
     private float frameTimer;
     private int frameIndex;
 
@@ -76,7 +76,6 @@ public class CharacterMovement : MonoBehaviour
         else
             coyoteCounter -= Time.deltaTime;
 
-        // Jump input
         if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -91,7 +90,6 @@ public class CharacterMovement : MonoBehaviour
             isJumping = false;
         }
 
-        // Fireball input
         if (Input.GetKeyDown(KeyCode.E) && fireballPrefab != null && firePoint != null)
         {
             ShootFireball();
@@ -116,7 +114,6 @@ public class CharacterMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(newVelocityY, maxJumpForce));
         }
 
-        // Update which sprite to show
         UpdateSpriteAnimation(move);
     }
 
@@ -160,6 +157,7 @@ public class CharacterMovement : MonoBehaviour
 
         float dir = facingRight ? 1f : -1f;
         fireball.Launch(new Vector2(dir, 0f));
+        fireball.ownerTag = "Player";
 
         Vector3 scale = fireballObj.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * dir;
