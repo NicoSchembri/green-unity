@@ -6,7 +6,7 @@ using System.Collections;
 public class GrappleTongue : MonoBehaviour
 {
     [Header("Tongue Origin")]
-    public Transform mouthPoint;          // Works like firePoint — attach under player sprite
+    public Transform mouthPoint;
 
     [Header("Grapple Settings")]
     public float grappleForce = 130f;
@@ -72,21 +72,20 @@ public class GrappleTongue : MonoBehaviour
 
     private IEnumerator ExtendTongue(Vector2 target, bool hitSomething)
     {
-        isGrappling = false;
         extending = true;
         retracting = false;
+        isGrappling = false;
 
         line.positionCount = 2;
+        float totalDist = Vector2.Distance(mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position, target);
         currentLength = 0f;
-
-        Vector2 start = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
-        float totalDist = Vector2.Distance(start, target);
 
         while (currentLength < totalDist)
         {
             currentLength += extendSpeed * Time.deltaTime;
-            Vector2 tip = Vector2.Lerp(start, target, currentLength / totalDist);
-            DrawTongue(start, tip);
+            Vector2 currentMouth = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
+            Vector2 tip = Vector2.Lerp(currentMouth, target, currentLength / totalDist);
+            DrawTongue(currentMouth, tip);
             yield return null;
         }
 
@@ -107,16 +106,16 @@ public class GrappleTongue : MonoBehaviour
     {
         retracting = true;
 
-        Vector2 start = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
         Vector2 end = line.GetPosition(1);
-        float totalDist = Vector2.Distance(start, end);
+        float totalDist = Vector2.Distance(mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position, end);
         float retractProgress = 0f;
 
         while (retractProgress < 1f)
         {
             retractProgress += (retractSpeed / totalDist) * Time.deltaTime;
-            Vector2 tip = Vector2.Lerp(end, start, retractProgress);
-            DrawTongue(start, tip);
+            Vector2 currentMouth = mouthPoint != null ? (Vector2)mouthPoint.position : (Vector2)transform.position;
+            Vector2 tip = Vector2.Lerp(end, currentMouth, retractProgress);
+            DrawTongue(currentMouth, tip);
             yield return null;
         }
 
@@ -132,13 +131,9 @@ public class GrappleTongue : MonoBehaviour
             float distance = toTarget.magnitude;
 
             if (distance > stopDistance)
-            {
                 rb.AddForce(toTarget.normalized * grappleForce);
-            }
-            else
-            {
+            else if (tongueRoutine == null)
                 tongueRoutine = StartCoroutine(RetractTongue());
-            }
         }
     }
 
@@ -163,6 +158,11 @@ public class GrappleTongue : MonoBehaviour
         extending = false;
         retracting = false;
         line.positionCount = 0;
+        if (tongueRoutine != null)
+        {
+            StopCoroutine(tongueRoutine);
+            tongueRoutine = null;
+        }
     }
 
     private void FlipMouthPoint(bool nowFacingRight)
@@ -171,7 +171,7 @@ public class GrappleTongue : MonoBehaviour
         if (mouthPoint == null) return;
 
         Vector3 pos = originalMouthLocalPos;
-        pos.x *= nowFacingRight ? 1 : -1;
+        pos.x = Mathf.Abs(originalMouthLocalPos.x) * (nowFacingRight ? 1 : -1);
         mouthPoint.localPosition = pos;
     }
 }

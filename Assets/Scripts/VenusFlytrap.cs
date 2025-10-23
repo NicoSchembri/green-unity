@@ -31,13 +31,21 @@ public class VenusFlyTrap : MonoBehaviour
             topTriggerCollider.isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isClosing && !isClosed)
+        if (other.CompareTag("Player"))
         {
-            if (other.transform.position.y > topTriggerCollider.bounds.center.y)
+            TryCloseTrap(other.gameObject);
+        }
+    }
+
+    private void TryCloseTrap(GameObject player)
+    {
+        if (!isClosing && !isClosed)
+        {
+            if (player.transform.position.y > topTriggerCollider.bounds.center.y)
             {
-                StartCoroutine(CloseTrap(other.gameObject));
+                StartCoroutine(CloseTrap(player));
             }
         }
     }
@@ -66,8 +74,18 @@ public class VenusFlyTrap : MonoBehaviour
         }
 
         yield return new WaitForSeconds(reopenDelay);
+
         isClosed = false;
         if (openSprite != null)
             spriteRenderer.sprite = openSprite;
+
+        if (player != null && topTriggerCollider != null)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            if (playerCollider != null && topTriggerCollider.IsTouching(playerCollider))
+            {
+                StartCoroutine(CloseTrap(player));
+            }
+        }
     }
 }

@@ -39,12 +39,14 @@ public class CharacterMovement : MonoBehaviour
     private float coyoteCounter;
     private bool jumpHeld;
     private bool isJumping;
-    private Vector3 spawnPoint;
 
     private bool facingRight = true;
 
     private float frameTimer;
     private int frameIndex;
+
+    private Vector3 spawnPoint;         
+    private Vector3 currentCheckpoint; 
 
     void Start()
     {
@@ -54,6 +56,7 @@ public class CharacterMovement : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
         spawnPoint = transform.position;
+        currentCheckpoint = spawnPoint;
 
         if (col.sharedMaterial == null)
         {
@@ -76,6 +79,7 @@ public class CharacterMovement : MonoBehaviour
         else
             coyoteCounter -= Time.deltaTime;
 
+        // Jump input
         if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -90,6 +94,7 @@ public class CharacterMovement : MonoBehaviour
             isJumping = false;
         }
 
+        // Fireball input
         if (Input.GetKeyDown(KeyCode.E) && fireballPrefab != null && firePoint != null)
         {
             ShootFireball();
@@ -172,15 +177,8 @@ public class CharacterMovement : MonoBehaviour
         transform.localScale = scale;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        CheckGroundCollision(collision);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        CheckGroundCollision(collision);
-    }
+    private void OnCollisionEnter2D(Collision2D collision) => CheckGroundCollision(collision);
+    private void OnCollisionStay2D(Collision2D collision) => CheckGroundCollision(collision);
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -230,7 +228,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Die()
     {
-        transform.position = spawnPoint;
+        transform.position = currentCheckpoint;  // when dead -> new spawnpoint
         rb.linearVelocity = Vector2.zero;
 
         currentHearts = maxHearts;
@@ -241,5 +239,10 @@ public class CharacterMovement : MonoBehaviour
         isJumping = false;
         jumpHeld = false;
         coyoteCounter = coyoteTime;
+    }
+
+    public void SetCheckpoint(Vector3 checkpointPosition)
+    {
+        currentCheckpoint = checkpointPosition;
     }
 }
