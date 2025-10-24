@@ -25,6 +25,9 @@ public class CharacterMovement : MonoBehaviour
     public GameObject fireballPrefab;
     public Transform firePoint;
 
+    [Header("Water Sword Settings")]
+    public GameObject waterSwordPrefab;
+
     [Header("Animation Frames")]
     public Sprite idleSprite;
     public Sprite jumpSprite;
@@ -45,8 +48,8 @@ public class CharacterMovement : MonoBehaviour
     private float frameTimer;
     private int frameIndex;
 
-    private Vector3 spawnPoint;         
-    private Vector3 currentCheckpoint; 
+    private Vector3 spawnPoint;
+    private Vector3 currentCheckpoint;
 
     void Start()
     {
@@ -99,20 +102,23 @@ public class CharacterMovement : MonoBehaviour
         {
             ShootFireball();
         }
+
+        // Watersword input
+        if (Input.GetKeyDown(KeyCode.Q) && waterSwordPrefab != null && firePoint != null)
+        {
+            SwingWaterSword();
+        }
     }
 
     void FixedUpdate()
     {
         float move = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
-
-        // Flip sprite
         if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
             Flip();
 
-        // Build jump force while holding jump
         if (jumpHeld && isJumping)
         {
             float newVelocityY = rb.linearVelocity.y + jumpBuildSpeed * Time.fixedDeltaTime;
@@ -167,6 +173,21 @@ public class CharacterMovement : MonoBehaviour
         Vector3 scale = fireballObj.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * dir;
         fireballObj.transform.localScale = scale;
+    }
+
+    private void SwingWaterSword()
+    {
+        if (waterSwordPrefab == null || firePoint == null)
+            return;
+
+        GameObject swordObj = Instantiate(waterSwordPrefab, firePoint.position, Quaternion.identity);
+        WaterSword sword = swordObj.GetComponent<WaterSword>();
+        if (sword == null)
+            return;
+
+        float dir = facingRight ? 1f : -1f;
+        sword.ownerTag = "Player";
+        sword.Swing(transform, new Vector2(dir, 0f));
     }
 
     private void Flip()
@@ -228,7 +249,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Die()
     {
-        transform.position = currentCheckpoint;  // when dead -> new spawnpoint
+        transform.position = currentCheckpoint;
         rb.linearVelocity = Vector2.zero;
 
         currentHearts = maxHearts;
