@@ -4,10 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(SpriteRenderer))]
 public class BugShooter : MonoBehaviour
 {
-    [Header("Health")]
-    public int maxHealth = 3;
-    private int currentHealth;
-
     [Header("Player Tracking")]
     public float detectionRange = 10f;
     public float shootInterval = 2f;
@@ -27,7 +23,6 @@ public class BugShooter : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -82,38 +77,6 @@ public class BugShooter : MonoBehaviour
         yield return new WaitForSeconds(shootInterval);
         canShoot = true;
     }
-
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        Debug.Log($"{name} took {damage} damage. Remaining HP: {currentHealth}");
-
-        if (currentHealth <= 0)
-            Die();
-    }
-
-    private void Die()
-    {
-        Debug.Log($"{name} was destroyed!");
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Fireball fb = other.GetComponent<Fireball>();
-        if (fb != null && fb.ownerTag == "Player")  
-        {
-            TakeDamage(fb.damage);
-            Destroy(other.gameObject);
-            return; 
-        }
-        WaterSword sword = other.GetComponent<WaterSword>();
-        if (sword != null && sword.ownerTag == "Player")
-        {
-            TakeDamage(sword.damage);
-        }
-    }
-
 
     private void OnDrawGizmosSelected()
     {

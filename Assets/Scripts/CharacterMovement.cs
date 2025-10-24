@@ -28,6 +28,9 @@ public class CharacterMovement : MonoBehaviour
     [Header("Water Sword Settings")]
     public GameObject waterSwordPrefab;
 
+    [Header("Rock Shield Settings")]
+    public GameObject rockShieldPrefab;
+
     [Header("Animation Frames")]
     public Sprite idleSprite;
     public Sprite jumpSprite;
@@ -50,6 +53,8 @@ public class CharacterMovement : MonoBehaviour
 
     private Vector3 spawnPoint;
     private Vector3 currentCheckpoint;
+
+    private GameObject activeRockShield;
 
     void Start()
     {
@@ -97,16 +102,51 @@ public class CharacterMovement : MonoBehaviour
             isJumping = false;
         }
 
-        // Fireball input
-        if (Input.GetKeyDown(KeyCode.E) && fireballPrefab != null && firePoint != null)
+        // Fireball input (disabled when shield is active)
+        if (Input.GetKeyDown(KeyCode.E) && fireballPrefab != null && firePoint != null && activeRockShield == null)
         {
             ShootFireball();
         }
 
-        // Watersword input
-        if (Input.GetKeyDown(KeyCode.Q) && waterSwordPrefab != null && firePoint != null)
+        // WaterSword input (disabled when shield is active)
+        if (Input.GetKeyDown(KeyCode.Q) && waterSwordPrefab != null && firePoint != null && activeRockShield == null)
         {
             SwingWaterSword();
+        }
+
+        // Rock shield input 
+        if (rockShieldPrefab != null && firePoint != null && isGrounded)
+        {
+            if (Input.GetMouseButton(1)) 
+            {
+                if (activeRockShield == null)
+                {
+                    activeRockShield = Instantiate(rockShieldPrefab);
+                    RockShield shield = activeRockShield.GetComponent<RockShield>();
+                    if (shield != null)
+                    {
+                        Vector2 facingDir = facingRight ? Vector2.right : Vector2.left;
+                        shield.ownerTag = "Player";
+                        shield.Activate(transform, firePoint, facingDir);
+                    }
+                }
+            }
+            else
+            {
+                if (activeRockShield != null)
+                {
+                    Destroy(activeRockShield);
+                    activeRockShield = null;
+                }
+            }
+        }
+        else
+        {
+            if (activeRockShield != null)
+            {
+                Destroy(activeRockShield);
+                activeRockShield = null;
+            }
         }
     }
 
@@ -114,6 +154,7 @@ public class CharacterMovement : MonoBehaviour
     {
         float move = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
+
         if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
@@ -170,6 +211,7 @@ public class CharacterMovement : MonoBehaviour
         fireball.Launch(new Vector2(dir, 0f));
         fireball.ownerTag = "Player";
 
+        // Flip the sprite horizontally based on direction
         Vector3 scale = fireballObj.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * dir;
         fireballObj.transform.localScale = scale;
