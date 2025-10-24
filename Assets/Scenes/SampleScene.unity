@@ -755,7 +755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416248813825084769, guid: 493af341370d3fb42b61c72f1360b657, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.291
+      value: -15.89
       objectReference: {fileID: 0}
     - target: {fileID: 5416248813825084769, guid: 493af341370d3fb42b61c72f1360b657, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1514,7 +1514,7 @@ Transform:
   m_GameObject: {fileID: 873224127}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.42, y: 1.7, z: 0}
+  m_LocalPosition: {x: 0.27, y: 2.13, z: 0}
   m_LocalScale: {x: 0.3911634, y: 0.3911634, z: 0.3911634}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1754,6 +1754,8 @@ MonoBehaviour:
   heartsUI: {fileID: 2125028038}
   fireballPrefab: {fileID: 8679725442693165356, guid: 6d8634d52e8ba2946a9515932dd086c9, type: 3}
   firePoint: {fileID: 1269173405}
+  waterSwordPrefab: {fileID: 5823408368651978924, guid: b55a2cec6c0bad34a89ea506c57ae2ba, type: 3}
+  rockShieldPrefab: {fileID: 9025673094447552614, guid: a8df5230571746442ac12c2451b5bc90, type: 3}
   idleSprite: {fileID: -5647679153401212607, guid: c6d58d9bfd85a5044b5cab04dbe5e0ca, type: 3}
   jumpSprite: {fileID: 917049934227455710, guid: c75e71901ff64a04091774e039e4d07e, type: 3}
   runSprites:
@@ -2245,7 +2247,7 @@ Transform:
   m_GameObject: {fileID: 1269173404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.24, y: 1.31, z: 0}
+  m_LocalPosition: {x: 2.86, y: 1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
