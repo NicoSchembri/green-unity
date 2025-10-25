@@ -37,6 +37,18 @@ public class CharacterMovement : MonoBehaviour
     public Sprite[] runSprites;
     public float frameRate = 0.1f;
 
+    // Spell unlock stuff
+    public enum SpellType
+    {
+        Fireball,
+        WaterSword,
+        RockShield
+    }
+
+    private bool fireballUnlocked = false;
+    private bool waterSwordUnlocked = false;
+    private bool rockShieldUnlocked = false;
+
     private Rigidbody2D rb;
     private Collider2D col;
     private SpriteRenderer sr;
@@ -78,6 +90,8 @@ public class CharacterMovement : MonoBehaviour
             heartsUI.UpdateHearts(currentHearts);
 
         sr.sprite = idleSprite;
+
+        LoadSpellUnlocks();
     }
 
     void Update()
@@ -102,22 +116,19 @@ public class CharacterMovement : MonoBehaviour
             isJumping = false;
         }
 
-        // Fireball input (disabled when shield is active)
-        if (Input.GetKeyDown(KeyCode.E) && fireballPrefab != null && firePoint != null && activeRockShield == null)
+        if (Input.GetKeyDown(KeyCode.E) && fireballUnlocked && fireballPrefab != null && firePoint != null && activeRockShield == null)
         {
             ShootFireball();
         }
 
-        // WaterSword input (disabled when shield is active)
-        if (Input.GetKeyDown(KeyCode.Q) && waterSwordPrefab != null && firePoint != null && activeRockShield == null)
+        if (Input.GetKeyDown(KeyCode.Q) && waterSwordUnlocked && waterSwordPrefab != null && firePoint != null && activeRockShield == null)
         {
             SwingWaterSword();
         }
 
-        // Rock shield input 
-        if (rockShieldPrefab != null && firePoint != null && isGrounded)
+        if (rockShieldUnlocked && rockShieldPrefab != null && firePoint != null && isGrounded)
         {
-            if (Input.GetMouseButton(1)) 
+            if (Input.GetMouseButton(1))
             {
                 if (activeRockShield == null)
                 {
@@ -307,5 +318,50 @@ public class CharacterMovement : MonoBehaviour
     public void SetCheckpoint(Vector3 checkpointPosition)
     {
         currentCheckpoint = checkpointPosition;
+    }
+
+    // Spell system
+    public void UnlockSpell(SpellType spell)
+    {
+        switch (spell)
+        {
+            case SpellType.Fireball:
+                fireballUnlocked = true;
+                PlayerPrefs.SetInt("Spell_Fireball", 1);
+                break;
+            case SpellType.WaterSword:
+                waterSwordUnlocked = true;
+                PlayerPrefs.SetInt("Spell_WaterSword", 1);
+                break;
+            case SpellType.RockShield:
+                rockShieldUnlocked = true;
+                PlayerPrefs.SetInt("Spell_RockShield", 1);
+                break;
+        }
+        PlayerPrefs.Save();
+    }
+
+    private void LoadSpellUnlocks()
+    {
+        fireballUnlocked = PlayerPrefs.GetInt("Spell_Fireball", 0) == 1;
+        waterSwordUnlocked = PlayerPrefs.GetInt("Spell_WaterSword", 0) == 1;
+        rockShieldUnlocked = PlayerPrefs.GetInt("Spell_RockShield", 0) == 1;
+
+        Debug.Log($"Loaded spells - Fireball: {fireballUnlocked}, WaterSword: {waterSwordUnlocked}, RockShield: {rockShieldUnlocked}");
+    }
+
+    public bool IsSpellUnlocked(SpellType spell)
+    {
+        switch (spell)
+        {
+            case SpellType.Fireball:
+                return fireballUnlocked;
+            case SpellType.WaterSword:
+                return waterSwordUnlocked;
+            case SpellType.RockShield:
+                return rockShieldUnlocked;
+            default:
+                return false;
+        }
     }
 }
