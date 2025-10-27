@@ -70,6 +70,8 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        SpellBook.ResetAllUnlocks();
+
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();

@@ -4977,7 +4977,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2143900813245723632, guid: 0707830943a8bbc499b17d3fb22d69e3, type: 3}
       propertyPath: maxLength
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2143900813245723632, guid: 0707830943a8bbc499b17d3fb22d69e3, type: 3}
       propertyPath: groundLayer.m_Bits
