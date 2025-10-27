@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 45517159ee51b7d43b8096581d2381d6
+guid: aa1b3b03c86e3934f80d4936219fba6f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7293537469564221507
-    second: Flytrap_mouth_closed-removebg_0
+      213: -2304346045760539068
+    second: Rock_wall__tile_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flytrap_mouth_closed-removebg_0
+      name: Rock_wall__tile_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 0
-        width: 366
-        height: 379
+        x: 42
+        y: 10
+        width: 310
+        height: 297
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: db78f92705628ca90800000000000000
-      internalID: -7293537469564221507
+      spriteID: 446fdd6fa715500e0800000000000000
+      internalID: -2304346045760539068
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Flytrap_mouth_closed-removebg_0: -7293537469564221507
+      Rock_wall__tile_0: -2304346045760539068
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

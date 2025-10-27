@@ -1,0 +1,1019 @@
+fileFormatVersion: 2
+guid: 01b6c8e2288725f428317c04c66d3b97
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9063976378086497420
+    second: Cartoon_tile_sheet_0
+  - first:
+      213: -2444892791017449491
+    second: Cartoon_tile_sheet_1
+  - first:
+      213: 6312163103882556972
+    second: Cartoon_tile_sheet_2
+  - first:
+      213: 1286560970504221954
+    second: Cartoon_tile_sheet_3
+  - first:
+      213: -4159175442901429322
+    second: Cartoon_tile_sheet_4
+  - first:
+      213: 6548789554531969824
+    second: Cartoon_tile_sheet_5
+  - first:
+      213: 3824347509553528111
+    second: Cartoon_tile_sheet_6
+  - first:
+      213: 5481729573671641142
+    second: Cartoon_tile_sheet_7
+  - first:
+      213: 3362698983003123357
+    second: Cartoon_tile_sheet_8
+  - first:
+      213: 792776241384421551
+    second: Cartoon_tile_sheet_9
+  - first:
+      213: -3549320622251792250
+    second: Cartoon_tile_sheet_10
+  - first:
+      213: -1537741299989082845
+    second: Cartoon_tile_sheet_11
+  - first:
+      213: 2558694776828350973
+    second: Cartoon_tile_sheet_12
+  - first:
+      213: -2302672500008018977
+    second: Cartoon_tile_sheet_13
+  - first:
+      213: -4005909257123017553
+    second: Cartoon_tile_sheet_14
+  - first:
+      213: -2502615820303545856
+    second: Cartoon_tile_sheet_15
+  - first:
+      213: 7600525653761369970
+    second: Cartoon_tile_sheet_16
+  - first:
+      213: 2438882043573136723
+    second: Cartoon_tile_sheet_17
+  - first:
+      213: 6872837893939761313
+    second: Cartoon_tile_sheet_18
+  - first:
+      213: 786567719641048027
+    second: Cartoon_tile_sheet_19
+  - first:
+      213: 7573866460483753987
+    second: Cartoon_tile_sheet_20
+  - first:
+      213: -3536317917676636347
+    second: Cartoon_tile_sheet_21
+  - first:
+      213: 4350521208151102486
+    second: Cartoon_tile_sheet_22
+  - first:
+      213: 9192086665017337764
+    second: Cartoon_tile_sheet_23
+  - first:
+      213: -6283282404338851492
+    second: Cartoon_tile_sheet_24
+  - first:
+      213: -4552041851779288749
+    second: Cartoon_tile_sheet_25
+  - first:
+      213: 4631138768159484051
+    second: Cartoon_tile_sheet_26
+  - first:
+      213: -7869725900084261441
+    second: Cartoon_tile_sheet_27
+  - first:
+      213: 7891494741759826076
+    second: Cartoon_tile_sheet_28
+  - first:
+      213: 3880821396518466711
+    second: Cartoon_tile_sheet_29
+  - first:
+      213: 4028992962765521475
+    second: Cartoon_tile_sheet_30
+  - first:
+      213: -125591618654918385
+    second: Cartoon_tile_sheet_31
+  - first:
+      213: 216588732355686556
+    second: Cartoon_tile_sheet_32
+  - first:
+      213: 6657688276147487338
+    second: Cartoon_tile_sheet_33
+  - first:
+      213: 394853245588290080
+    second: Cartoon_tile_sheet_34
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 1599
+        width: 728
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4736f93d189463280800000000000000
+      internalID: -9063976378086497420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 1882
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7dd7dc5fef11ed0800000000000000
+      internalID: -2444892791017449491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1822
+        y: 1878
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c263f3356ee499750800000000000000
+      internalID: 6312163103882556972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 1560
+        width: 533
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20539ccd268cad110800000000000000
+      internalID: 1286560970504221954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 1833
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b3155f88f3a746c0800000000000000
+      internalID: -4159175442901429322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 1822
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02baaa22769f1ea50800000000000000
+      internalID: 6548789554531969824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 1841
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2d76943ccfc21530800000000000000
+      internalID: 3824347509553528111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 1834
+        width: 72
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 630a379f004031c40800000000000000
+      internalID: 5481729573671641142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 1837
+        width: 89
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9ee770a8e4baae20800000000000000
+      internalID: 3362698983003123357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 1838
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa8761e8ac1800b00800000000000000
+      internalID: 792776241384421551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 1597
+        width: 542
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 688a6bcf2b74ebec0800000000000000
+      internalID: -3549320622251792250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_11
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 1720
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32d04b95f68d8aae0800000000000000
+      internalID: -1537741299989082845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_12
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 1494
+        width: 40
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df1508dc75f428320800000000000000
+      internalID: 2558694776828350973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_13
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 1244
+        width: 254
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdb16f2bf834b00e0800000000000000
+      internalID: -2302672500008018977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 1501
+        width: 8
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faccbbe31c62868c0800000000000000
+      internalID: -4005909257123017553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_15
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1221
+        width: 191
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00ac88dbb2ce44dd0800000000000000
+      internalID: -2502615820303545856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_16
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 1359
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277a0b210dd7a7960800000000000000
+      internalID: 7600525653761369970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_17
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1366
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35d61400c46a8d120800000000000000
+      internalID: 2438882043573136723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 891
+        width: 622
+        height: 592
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a09f1396a9316f50800000000000000
+      internalID: 6872837893939761313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_19
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 1221
+        width: 176
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd36ef07c237aea00800000000000000
+      internalID: 786567719641048027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_20
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 1265
+        width: 4
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3081161fa67cb1960800000000000000
+      internalID: 7573866460483753987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_21
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 932
+        width: 220
+        height: 275
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 547f80017997ceec0800000000000000
+      internalID: -3536317917676636347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_22
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 1006
+        width: 42
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61456af1df7206c30800000000000000
+      internalID: 4350521208151102486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_23
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 1136
+        width: 29
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a7a6fcbe1ad09f70800000000000000
+      internalID: 9192086665017337764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_24
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 1053
+        width: 19
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c51abe981fb4dc8a0800000000000000
+      internalID: -6283282404338851492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_25
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 1112
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 351fbf5bd06e3d0c0800000000000000
+      internalID: -4552041851779288749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_26
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 978
+        width: 57
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 398afad3c2c154040800000000000000
+      internalID: 4631138768159484051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_27
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 1104
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbd49cd4dfd19c290800000000000000
+      internalID: -7869725900084261441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 1082
+        width: 5
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c98157d18a8348d60800000000000000
+      internalID: 7891494741759826076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_29
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 984
+        width: 105
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794f738af727bd530800000000000000
+      internalID: 3880821396518466711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_30
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 986
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 342003cc0cbd9e730800000000000000
+      internalID: 4028992962765521475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_31
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 508
+        width: 262
+        height: 359
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f09ae47961fc14ef0800000000000000
+      internalID: -125591618654918385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_32
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 505
+        width: 268
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c90b966fd4a710300800000000000000
+      internalID: 216588732355686556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cartoon_tile_sheet_33
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 512
+        width: 282
+        height: 363
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62cd05963cd46c50800000000000000
+      internalID: 6657688276147487338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 67eb40c6749325e45b1c12c5218f7486
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Cartoon_tile_sheet_0: -9063976378086497420
+      Cartoon_tile_sheet_1: -2444892791017449491
+      Cartoon_tile_sheet_10: -3549320622251792250
+      Cartoon_tile_sheet_11: -1537741299989082845
+      Cartoon_tile_sheet_12: 2558694776828350973
+      Cartoon_tile_sheet_13: -2302672500008018977
+      Cartoon_tile_sheet_14: -4005909257123017553
+      Cartoon_tile_sheet_15: -2502615820303545856
+      Cartoon_tile_sheet_16: 7600525653761369970
+      Cartoon_tile_sheet_17: 2438882043573136723
+      Cartoon_tile_sheet_18: 6872837893939761313
+      Cartoon_tile_sheet_19: 786567719641048027
+      Cartoon_tile_sheet_2: 6312163103882556972
+      Cartoon_tile_sheet_20: 7573866460483753987
+      Cartoon_tile_sheet_21: -3536317917676636347
+      Cartoon_tile_sheet_22: 4350521208151102486
+      Cartoon_tile_sheet_23: 9192086665017337764
+      Cartoon_tile_sheet_24: -6283282404338851492
+      Cartoon_tile_sheet_25: -4552041851779288749
+      Cartoon_tile_sheet_26: 4631138768159484051
+      Cartoon_tile_sheet_27: -7869725900084261441
+      Cartoon_tile_sheet_28: 7891494741759826076
+      Cartoon_tile_sheet_29: 3880821396518466711
+      Cartoon_tile_sheet_3: 1286560970504221954
+      Cartoon_tile_sheet_30: 4028992962765521475
+      Cartoon_tile_sheet_31: -125591618654918385
+      Cartoon_tile_sheet_32: 216588732355686556
+      Cartoon_tile_sheet_33: 6657688276147487338
+      Cartoon_tile_sheet_4: -4159175442901429322
+      Cartoon_tile_sheet_5: 6548789554531969824
+      Cartoon_tile_sheet_6: 3824347509553528111
+      Cartoon_tile_sheet_7: 5481729573671641142
+      Cartoon_tile_sheet_8: 3362698983003123357
+      Cartoon_tile_sheet_9: 792776241384421551
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
