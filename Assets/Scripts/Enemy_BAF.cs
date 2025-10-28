@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class Enemy_BAF : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioClip hissSound;
+    private AudioSource audioSource;
+
     [Header("Movement")]
     public float moveSpeed = 2f;
     private int moveDirection = -1;
@@ -26,6 +31,16 @@ public class Enemy_BAF : MonoBehaviour
         rb.gravityScale = 1f;
         rb.freezeRotation = true;
         lastFlipTime = -flipCooldown;
+
+        audioSource = GetComponent<AudioSource>();
+        if (hissSound != null)
+        {
+            audioSource.clip = hissSound;
+            audioSource.loop = true;
+            audioSource.playOnAwake = false;
+            audioSource.volume = 0.5f;
+            audioSource.Play();
+        }
     }
 
     private void FixedUpdate()
@@ -113,6 +128,10 @@ public class Enemy_BAF : MonoBehaviour
     private void Die()
     {
         Debug.Log("dawg got squashed!");
+
+        if (audioSource != null && audioSource.isPlaying)
+            audioSource.Stop();
+
         Destroy(gameObject);
     }
 
