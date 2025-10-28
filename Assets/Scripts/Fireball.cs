@@ -10,12 +10,24 @@ public class Fireball : MonoBehaviour
     public int damage = 1;
     public string ownerTag;
 
+    [Header("Audio")]
+    public AudioClip launchSound;
+    [Range(0f, 1f)] public float launchVolume = 1f;
+
     private Rigidbody2D rb;
+    private AudioSource audioSource;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
     }
 
     void Start()
@@ -32,6 +44,11 @@ public class Fireball : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+
+        if (launchSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(launchSound, launchVolume);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,19 +56,26 @@ public class Fireball : MonoBehaviour
         if (collision.CompareTag(ownerTag))
             return;
 
+        bool shouldDestroy = false;
+
         if (ownerTag == "Player" && collision.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            shouldDestroy = true;
         }
         else if (ownerTag == "Enemy" && collision.CompareTag("Player"))
         {
             CharacterMovement character = collision.GetComponent<CharacterMovement>();
             if (character != null)
                 character.TakeDamage(damage);
-            Destroy(gameObject);
+            shouldDestroy = true;
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            shouldDestroy = true;
+        }
+
+        if (shouldDestroy)
         {
             Destroy(gameObject);
         }
