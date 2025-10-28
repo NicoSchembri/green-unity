@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AudioSource))]
 public class BugShooter : MonoBehaviour
 {
     [Header("Player Tracking")]
@@ -17,19 +18,49 @@ public class BugShooter : MonoBehaviour
     [Header("Visuals")]
     public bool faceRightInitially = true;
 
+    [Header("Audio")]
+    public AudioClip bugIdleSound;   
+    public AudioClip shootSound;      
+    [Range(0f, 1f)] public float bugVolume = 0.6f;
+    [Range(0f, 1f)] public float shootVolume = 0.8f;
+
     private Transform player;
     private bool canShoot = true;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.Stop();
+        audioSource.clip = null;
+        audioSource.loop = false;
+        audioSource.playOnAwake = false;
+        audioSource.volume = bugVolume;
+    }
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (firePoint == null)
             Debug.LogWarning($"{name}: FirePoint not assigned!");
         if (fireballPrefab == null)
             Debug.LogWarning($"{name}: Fireball prefab not assigned!");
+
+        // --- Play idle sound loop ---
+        if (bugIdleSound != null)
+        {
+            audioSource.clip = bugIdleSound;
+            audioSource.loop = true;      // force looping
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"{name}: No idle sound assigned!");
+        }
     }
 
     void Update()
@@ -58,6 +89,9 @@ public class BugShooter : MonoBehaviour
     private IEnumerator ShootAtPlayer()
     {
         canShoot = false;
+
+        if (shootSound != null)
+            AudioSource.PlayClipAtPoint(shootSound, transform.position, shootVolume);
 
         if (fireballPrefab != null && firePoint != null && player != null)
         {

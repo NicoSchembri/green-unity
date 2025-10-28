@@ -256,6 +256,9 @@ MonoBehaviour:
   maxHearts: 5
   currentHearts: 5
   heartsUI: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 763f81131fed0c141b4f1e12f05e2d3e, type: 3}
+  runSound: {fileID: 8300000, guid: 59f6ffdec4a471241bf187efe6f2c91f, type: 3}
+  runSoundInterval: 0.3
   fireballPrefab: {fileID: 8679725442693165356, guid: 6d8634d52e8ba2946a9515932dd086c9, type: 3}
   firePoint: {fileID: 4582378208437296151}
   waterSwordPrefab: {fileID: 5823408368651978924, guid: b55a2cec6c0bad34a89ea506c57ae2ba, type: 3}

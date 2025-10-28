@@ -183,4 +183,4 @@ MonoBehaviour:
   damage: 1
   ownerTag: 
   launchSound: {fileID: 8300000, guid: 0c7544f11e0b1114f95ad95f8e98996a, type: 3}
-  launchVolume: 1
+  launchVolume: 0.5

@@ -21,6 +21,12 @@ public class CharacterMovement : MonoBehaviour
     public int currentHearts = 5;
     public HeartsUI heartsUI;
 
+    [Header("Audio")]
+    public AudioClip jumpSound;
+    public AudioClip runSound;
+    [Range(0f, 1f)]
+    public float runSoundVolume = 1f;
+
     [Header("Fireball Settings")]
     public GameObject fireballPrefab;
     public Transform firePoint;
@@ -62,6 +68,7 @@ public class CharacterMovement : MonoBehaviour
 
     private float frameTimer;
     private int frameIndex;
+    private AudioSource runAudioSource;
 
     private Vector3 spawnPoint;
     private Vector3 currentCheckpoint;
@@ -97,6 +104,15 @@ public class CharacterMovement : MonoBehaviour
         sr.sprite = idleSprite;
 
         LoadSpellUnlocks();
+
+        runAudioSource = gameObject.AddComponent<AudioSource>();
+        runAudioSource.loop = true;
+        runAudioSource.playOnAwake = false;
+        runAudioSource.volume = runSoundVolume;
+        if (runSound != null)
+        {
+            runAudioSource.clip = runSound;
+        }
     }
 
     void Update()
@@ -113,6 +129,12 @@ public class CharacterMovement : MonoBehaviour
             isJumping = true;
             jumpHeld = true;
             coyoteCounter = 0f;
+
+            // Play jump sound
+            if (jumpSound != null)
+            {
+                AudioSource.PlayClipAtPoint(jumpSound, transform.position);
+            }
         }
 
         if (Input.GetButtonUp("Jump"))
@@ -192,6 +214,10 @@ public class CharacterMovement : MonoBehaviour
         if (!isGrounded)
         {
             sr.sprite = jumpSprite;
+            if (runAudioSource != null && runAudioSource.isPlaying)
+            {
+                runAudioSource.Stop();
+            }
             return;
         }
 
@@ -204,12 +230,22 @@ public class CharacterMovement : MonoBehaviour
                 frameIndex = (frameIndex + 1) % runSprites.Length;
                 sr.sprite = runSprites[frameIndex];
             }
+
+            if (runAudioSource != null && !runAudioSource.isPlaying && runSound != null)
+            {
+                runAudioSource.Play();
+            }
         }
         else
         {
             sr.sprite = idleSprite;
             frameTimer = 0f;
             frameIndex = 0;
+
+            if (runAudioSource != null && runAudioSource.isPlaying)
+            {
+                runAudioSource.Stop();
+            }
         }
     }
 
