@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour
     public float speed = 10f;
     public float lifetime = 3f;
     public int damage = 1;
-    public string ownerTag; // Either "Player" or "Enemy"
+    public string ownerTag;
 
     private Rigidbody2D rb;
 
@@ -27,13 +27,11 @@ public class Fireball : MonoBehaviour
     {
         rb.linearVelocity = dir.normalized * speed;
 
-        // Only rotate if shooting at an angle (for bug shooter)
         if (Mathf.Abs(dir.y) > 0.01f)
         {
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
-        // For horizontal shots, the flip is handled by the spawner (CharacterMovement or BugShooter)
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
