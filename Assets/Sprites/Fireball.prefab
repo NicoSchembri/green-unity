@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda1f690891c6ef4a9de1047333c0b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
-  speed: 17
+  speed: 15
   lifetime: 1
   damage: 1
   ownerTag: 
