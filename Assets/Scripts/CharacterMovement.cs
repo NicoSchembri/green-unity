@@ -75,11 +75,6 @@ public class CharacterMovement : MonoBehaviour
 
     private GameObject activeRockShield;
 
-    private void Awake()
-    {
-        SpellBook.ResetAllUnlocks();
-    }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
