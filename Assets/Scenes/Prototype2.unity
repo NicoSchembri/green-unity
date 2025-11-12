@@ -8426,6 +8426,14 @@ PrefabInstance:
       propertyPath: heartsUI
       value: 
       objectReference: {fileID: 89325674}
+    - target: {fileID: 7489996479839335517, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7489996479839335517, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 9051934904545416460, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
       propertyPath: m_Name
       value: MainCharacter
