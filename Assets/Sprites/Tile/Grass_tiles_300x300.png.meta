@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: 3474b73f69136cc46a5eaaccbcedb5ad
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7166839894491891034
+    second: Grass_tiles_300x300_0
+  - first:
+      213: 4686144263885875986
+    second: Grass_tiles_300x300_1
+  - first:
+      213: 7336888246291390926
+    second: Grass_tiles_300x300_2
+  - first:
+      213: -4876751435610084734
+    second: Grass_tiles_300x300_3
+  - first:
+      213: 8832972588207101894
+    second: Grass_tiles_300x300_4
+  - first:
+      213: 4611125496118030834
+    second: Grass_tiles_300x300_5
+  - first:
+      213: -4220942678799195952
+    second: Grass_tiles_300x300_6
+  - first:
+      213: -3636055859694396549
+    second: Grass_tiles_300x300_7
+  - first:
+      213: 2708680151645742880
+    second: Grass_tiles_300x300_8
+  - first:
+      213: 5603716304758244404
+    second: Grass_tiles_300x300_9
+  - first:
+      213: -1730591033546014561
+    second: Grass_tiles_300x300_10
+  - first:
+      213: -467300949032508975
+    second: Grass_tiles_300x300_11
+  - first:
+      213: 3689881256405686189
+    second: Grass_tiles_300x300_12
+  - first:
+      213: -630537242876343496
+    second: Grass_tiles_300x300_13
+  - first:
+      213: -5784254384363985977
+    second: Grass_tiles_300x300_14
+  - first:
+      213: 319493066533422968
+    second: Grass_tiles_300x300_15
+  - first:
+      213: 3636811272372950783
+    second: Grass_tiles_300x300_16
+  - first:
+      213: 1189297266894479089
+    second: Grass_tiles_300x300_17
+  - first:
+      213: 8219710357514207217
+    second: Grass_tiles_300x300_18
+  - first:
+      213: -845374155211346715
+    second: Grass_tiles_300x300_19
+  - first:
+      213: 359661465311635543
+    second: Grass_tiles_300x300_20
+  - first:
+      213: -6686648544709017355
+    second: Grass_tiles_300x300_21
+  - first:
+      213: -2881871851067123350
+    second: Grass_tiles_300x300_22
+  - first:
+      213: 4743699610503208147
+    second: Grass_tiles_300x300_23
+  - first:
+      213: -4570320644746864521
+    second: Grass_tiles_300x300_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_0
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 972
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a55894999eab57360800000000000000
+      internalID: 7166839894491891034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_1
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1182
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21be6273167880140800000000000000
+      internalID: 4686144263885875986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_2
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 970
+        width: 302
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec1efecccfcd1d560800000000000000
+      internalID: 7336888246291390926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_3
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 972
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28aa59e486c425cb0800000000000000
+      internalID: -4876751435610084734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1182
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c7d8d615c5059a70800000000000000
+      internalID: 8832972588207101894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_5
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1098
+        width: 9
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f1bcda35320eff30800000000000000
+      internalID: 4611125496118030834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_6
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 1098
+        width: 9
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d063e44ff23c65c0800000000000000
+      internalID: -4220942678799195952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_7
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1011
+        width: 4
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b1073d5722a8dc0800000000000000
+      internalID: -3636055859694396549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_8
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 1011
+        width: 4
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 027eef82f3a279520800000000000000
+      internalID: 2708680151645742880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_9
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 603
+        width: 300
+        height: 301
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4340e271a4664cd40800000000000000
+      internalID: 5603716304758244404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_10
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 816
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f908302cf94bbf7e0800000000000000
+      internalID: -1730591033546014561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_11
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 581
+        width: 300
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d1e6b14340d389f0800000000000000
+      internalID: -467300949032508975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_12
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 619
+        width: 300
+        height: 301
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7de6fe377153330800000000000000
+      internalID: 3689881256405686189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_13
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 832
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83b83b4e7b1ef37f0800000000000000
+      internalID: -630537242876343496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_14
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 732
+        width: 9
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c32d71a8433abfa0800000000000000
+      internalID: -5784254384363985977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_15
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 748
+        width: 9
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 877cce250411f6400800000000000000
+      internalID: 319493066533422968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_16
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 643
+        width: 4
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff61de4659c887230800000000000000
+      internalID: 3636811272372950783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_17
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 659
+        width: 4
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fe9695209b318010800000000000000
+      internalID: 1189297266894479089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_18
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 235
+        width: 298
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ffbb303507421270800000000000000
+      internalID: 8219710357514207217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_19
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 447
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ece4505fa0a444f0800000000000000
+      internalID: -845374155211346715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_20
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 234
+        width: 300
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758eb477236cdf400800000000000000
+      internalID: 359661465311635543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_21
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 241
+        width: 298
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f08cb273904433a0800000000000000
+      internalID: -6686648544709017355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_22
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 453
+        width: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6952fcf1d88108d0800000000000000
+      internalID: -2881871851067123350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_23
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 364
+        width: 9
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dcd33d99a105d140800000000000000
+      internalID: 4743699610503208147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_tiles_300x300_24
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 370
+        width: 9
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7789a349695f290c0800000000000000
+      internalID: -4570320644746864521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d6cdc124f08b786499f0efc1d340c31e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Grass_tiles_300x300_0: 7166839894491891034
+      Grass_tiles_300x300_1: 4686144263885875986
+      Grass_tiles_300x300_10: -1730591033546014561
+      Grass_tiles_300x300_11: -467300949032508975
+      Grass_tiles_300x300_12: 3689881256405686189
+      Grass_tiles_300x300_13: -630537242876343496
+      Grass_tiles_300x300_14: -5784254384363985977
+      Grass_tiles_300x300_15: 319493066533422968
+      Grass_tiles_300x300_16: 3636811272372950783
+      Grass_tiles_300x300_17: 1189297266894479089
+      Grass_tiles_300x300_18: 8219710357514207217
+      Grass_tiles_300x300_19: -845374155211346715
+      Grass_tiles_300x300_2: 7336888246291390926
+      Grass_tiles_300x300_20: 359661465311635543
+      Grass_tiles_300x300_21: -6686648544709017355
+      Grass_tiles_300x300_22: -2881871851067123350
+      Grass_tiles_300x300_23: 4743699610503208147
+      Grass_tiles_300x300_24: -4570320644746864521
+      Grass_tiles_300x300_3: -4876751435610084734
+      Grass_tiles_300x300_4: 8832972588207101894
+      Grass_tiles_300x300_5: 4611125496118030834
+      Grass_tiles_300x300_6: -4220942678799195952
+      Grass_tiles_300x300_7: -3636055859694396549
+      Grass_tiles_300x300_8: 2708680151645742880
+      Grass_tiles_300x300_9: 5603716304758244404
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
