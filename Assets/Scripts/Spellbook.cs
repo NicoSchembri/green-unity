@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -11,36 +10,39 @@ public class SpellBook : MonoBehaviour
         WaterSword,
         RockShield
     }
+
+    [Header("Spell Settings")]
     public SpellType spellType;
+    public string spellName = "Spell";
 
-    [Header("UI Settings")]
-    public string spellName = "Spell Name";
-    public float promptOffset = 1.5f; 
+    [Header("Unlock Prompt")]
+    public GameObject promptPrefab;
+    public float promptOffset = 1.5f;
 
-    [Header("Visual Feedback")]
-    public AudioClip unlockSound; 
+    [Header("Audio")]
+    public AudioClip unlockSound;
 
-    [Header("Book Settings")]
-    public bool destroyAfterUnlock = false;
+    [Header("Book Behavior")]
+    public bool hideAfterUnlock = false;
 
-    private bool playerInRange = false;
-    private bool isUnlocked = false;
     private Collider2D col;
     private SpriteRenderer sr;
+    private bool playerInRange = false;
+    private bool isUnlocked = false;
     private GameObject promptInstance;
 
-    void Awake()
+    void Start()
     {
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
         col.isTrigger = true;
 
-        string saveKey = GetSaveKey();
-        isUnlocked = PlayerPrefs.GetInt(saveKey, 0) == 1;
+        isUnlocked = PlayerPrefs.GetInt(GetKey(), 0) == 1;
 
-        if (isUnlocked)
+        if (isUnlocked && hideAfterUnlock)
         {
-            OnAlreadyUnlocked();
+            sr.enabled = false;
+            col.enabled = false;
         }
     }
 
@@ -53,138 +55,95 @@ public class SpellBook : MonoBehaviour
 
         if (promptInstance != null)
         {
-            promptInstance.transform.position = transform.position + Vector3.up * promptOffset;
+            promptInstance.transform.position =
+                transform.position + Vector3.up * promptOffset;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D c)
     {
-        if (collision.CompareTag("Player") && !isUnlocked)
-        {
-            playerInRange = true;
-        }
+        if (!c.CompareTag("Player")) return;
+
+        playerInRange = true;
+        if (!isUnlocked)
+            ShowPrompt();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D c)
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerInRange = false;
-            HidePrompt();
-        }
+        if (!c.CompareTag("Player")) return;
+
+        playerInRange = false;
+        HidePrompt();
     }
 
     private void UnlockSpell()
     {
-        CharacterMovement player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<CharacterMovement>();
+        CharacterMovement player =
+            GameObject.FindGameObjectWithTag("Player")?.GetComponent<CharacterMovement>();
+
         if (player == null)
         {
-            Debug.LogWarning("SpellBook: Could not find player!");
+            Debug.LogError("SpellBook: Player not found!");
             return;
         }
 
-        bool unlocked = false;
         switch (spellType)
         {
             case SpellType.Fireball:
-                if (player.fireballPrefab != null)
-                {
-                    player.UnlockSpell(CharacterMovement.SpellType.Fireball);
-                    unlocked = true;
-                }
-                else
-                {
-                    Debug.LogWarning("SpellBook: Fireball prefab not assigned to player!");
-                }
+                player.UnlockSpell(CharacterMovement.SpellType.Fireball);
                 break;
+
             case SpellType.WaterSword:
-                if (player.waterSwordPrefab != null)
-                {
-                    player.UnlockSpell(CharacterMovement.SpellType.WaterSword);
-                    unlocked = true;
-                }
-                else
-                {
-                    Debug.LogWarning("SpellBook: WaterSword prefab not assigned to player!");
-                }
+                player.UnlockSpell(CharacterMovement.SpellType.WaterSword);
                 break;
+
             case SpellType.RockShield:
-                if (player.rockShieldPrefab != null)
-                {
-                    player.UnlockSpell(CharacterMovement.SpellType.RockShield);
-                    unlocked = true;
-                }
-                else
-                {
-                    Debug.LogWarning("SpellBook: RockShield prefab not assigned to player!");
-                }
+                player.UnlockSpell(CharacterMovement.SpellType.RockShield);
                 break;
         }
 
-        if (!unlocked)
-            return;
-
-        string saveKey = GetSaveKey();
-        PlayerPrefs.SetInt(saveKey, 1);
+        PlayerPrefs.SetInt(GetKey(), 1);
         PlayerPrefs.Save();
 
         isUnlocked = true;
 
         if (unlockSound != null)
-        {
             AudioSource.PlayClipAtPoint(unlockSound, transform.position);
-        }
 
-        Debug.Log($"Unlocked spell: {spellName}!");
-
-
+        Debug.Log($"Unlocked spell: {spellName}");
 
         HidePrompt();
-        if (destroyAfterUnlock)
+
+        if (hideAfterUnlock)
         {
-            Destroy(gameObject, 0.5f); 
-        }
-        else
-        {
-            col.enabled = false; 
+            sr.enabled = false;
+            col.enabled = false;
         }
     }
 
-    private void OnAlreadyUnlocked()
+    private void ShowPrompt()
     {
-        if (destroyAfterUnlock)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            col.enabled = false;
-        }
+        if (promptPrefab == null || promptInstance != null)
+            return;
+
+        promptInstance = Instantiate(
+            promptPrefab,
+            transform.position + Vector3.up * promptOffset,
+            Quaternion.identity
+        );
     }
 
     private void HidePrompt()
     {
         if (promptInstance != null)
-        {
             Destroy(promptInstance);
-            promptInstance = null;
-        }
+
+        promptInstance = null;
     }
 
-    private string GetSaveKey()
+    private string GetKey()
     {
-        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        return $"SpellBook_{sceneName}_{spellType}_{transform.position.x}_{transform.position.y}";
-    }
-
-    void OnDestroy()
-    {
-        HidePrompt();
-    }
-    public static void ResetAllUnlocks()
-    {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-        Debug.Log("All spell unlocks have been reset!");
+        return $"Spell_{spellType}";
     }
 }

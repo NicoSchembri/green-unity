@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -43,13 +44,25 @@ public class CharacterMovement : MonoBehaviour
     public Sprite[] runSprites;
     public float frameRate = 0.1f;
 
+    [Header("Spell UI Icons")]
+    public Image fireballIcon;
+    public Image waterSwordIcon;
+    public Image rockShieldIcon;
+
+    private Color availableColor = Color.white;
+    private Color cooldownColor = new Color(1f, 1f, 1f, 0.3f);
+
+    [Header("Cooldowns (1 second each)")]
+    public float fireballCooldown = 1f;
+    public float waterSwordCooldown = 1f;
+    public float rockShieldCooldown = 1f;
+
+    private float fireballCooldownTimer = 0f;
+    private float waterSwordCooldownTimer = 0f;
+    private float rockShieldCooldownTimer = 0f;
+
     // Spell unlock stuff
-    public enum SpellType
-    {
-        Fireball,
-        WaterSword,
-        RockShield
-    }
+    public enum SpellType { Fireball, WaterSword, RockShield }
 
     private bool fireballUnlocked = false;
     private bool waterSwordUnlocked = false;
@@ -98,26 +111,36 @@ public class CharacterMovement : MonoBehaviour
 
         sr.sprite = idleSprite;
 
+        PlayerPrefs.SetInt("Spell_Fireball", 0);
+        PlayerPrefs.SetInt("Spell_WaterSword", 0);
+        PlayerPrefs.SetInt("Spell_RockShield", 0);
+        PlayerPrefs.Save();
+
         LoadSpellUnlocks();
+        UpdateSpellIconVisibility();
 
         runAudioSource = gameObject.AddComponent<AudioSource>();
         runAudioSource.loop = true;
         runAudioSource.playOnAwake = false;
         runAudioSource.volume = runSoundVolume;
         if (runSound != null)
-        {
             runAudioSource.clip = runSound;
-        }
     }
 
     void Update()
     {
+        // Cooldown timers
+        fireballCooldownTimer -= Time.deltaTime;
+        waterSwordCooldownTimer -= Time.deltaTime;
+        rockShieldCooldownTimer -= Time.deltaTime;
+
+        UpdateSpellIcons();
+
         if (isGrounded)
             coyoteCounter = coyoteTime;
         else
             coyoteCounter -= Time.deltaTime;
 
-        // Jump input
         if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -125,11 +148,8 @@ public class CharacterMovement : MonoBehaviour
             jumpHeld = true;
             coyoteCounter = 0f;
 
-            // Play jump sound
             if (jumpSound != null)
-            {
                 AudioSource.PlayClipAtPoint(jumpSound, transform.position);
-            }
         }
 
         if (Input.GetButtonUp("Jump"))
@@ -138,17 +158,36 @@ public class CharacterMovement : MonoBehaviour
             isJumping = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && fireballUnlocked && fireballPrefab != null && firePoint != null && activeRockShield == null)
+        // Fireball
+        if (Input.GetKeyDown(KeyCode.E) &&
+            fireballUnlocked &&
+            fireballCooldownTimer <= 0f &&
+            fireballPrefab != null &&
+            firePoint != null &&
+            activeRockShield == null)
         {
             ShootFireball();
+            fireballCooldownTimer = fireballCooldown;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && waterSwordUnlocked && waterSwordPrefab != null && firePoint != null && activeRockShield == null)
+        // Water Sword
+        if (Input.GetKeyDown(KeyCode.Q) &&
+            waterSwordUnlocked &&
+            waterSwordCooldownTimer <= 0f &&
+            waterSwordPrefab != null &&
+            firePoint != null &&
+            activeRockShield == null)
         {
             SwingWaterSword();
+            waterSwordCooldownTimer = waterSwordCooldown;
         }
 
-        if (rockShieldUnlocked && rockShieldPrefab != null && firePoint != null && isGrounded)
+        // Rock Shield
+        if (rockShieldUnlocked &&
+            rockShieldCooldownTimer <= 0f &&
+            rockShieldPrefab != null &&
+            firePoint != null &&
+            isGrounded)
         {
             if (Input.GetMouseButton(1))
             {
@@ -158,9 +197,9 @@ public class CharacterMovement : MonoBehaviour
                     RockShield shield = activeRockShield.GetComponent<RockShield>();
                     if (shield != null)
                     {
-                        Vector2 facingDir = facingRight ? Vector2.right : Vector2.left;
+                        Vector2 dir = facingRight ? Vector2.right : Vector2.left;
                         shield.ownerTag = "Player";
-                        shield.Activate(transform, firePoint, facingDir);
+                        shield.Activate(transform, firePoint, dir);
                     }
                 }
             }
@@ -170,6 +209,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     Destroy(activeRockShield);
                     activeRockShield = null;
+                    rockShieldCooldownTimer = rockShieldCooldown;
                 }
             }
         }
@@ -179,6 +219,7 @@ public class CharacterMovement : MonoBehaviour
             {
                 Destroy(activeRockShield);
                 activeRockShield = null;
+                rockShieldCooldownTimer = rockShieldCooldown;
             }
         }
     }
@@ -188,15 +229,13 @@ public class CharacterMovement : MonoBehaviour
         float move = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
 
-        if (move > 0 && !facingRight)
-            Flip();
-        else if (move < 0 && facingRight)
-            Flip();
+        if (move > 0 && !facingRight) Flip();
+        else if (move < 0 && facingRight) Flip();
 
         if (jumpHeld && isJumping)
         {
-            float newVelocityY = rb.linearVelocity.y + jumpBuildSpeed * Time.fixedDeltaTime;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(newVelocityY, maxJumpForce));
+            float newVelY = rb.linearVelocity.y + jumpBuildSpeed * Time.fixedDeltaTime;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(newVelY, maxJumpForce));
         }
 
         UpdateSpriteAnimation(move);
@@ -209,10 +248,7 @@ public class CharacterMovement : MonoBehaviour
         if (!isGrounded)
         {
             sr.sprite = jumpSprite;
-            if (runAudioSource != null && runAudioSource.isPlaying)
-            {
-                runAudioSource.Stop();
-            }
+            if (runAudioSource.isPlaying) runAudioSource.Stop();
             return;
         }
 
@@ -226,10 +262,8 @@ public class CharacterMovement : MonoBehaviour
                 sr.sprite = runSprites[frameIndex];
             }
 
-            if (runAudioSource != null && !runAudioSource.isPlaying && runSound != null)
-            {
+            if (!runAudioSource.isPlaying && runSound != null)
                 runAudioSource.Play();
-            }
         }
         else
         {
@@ -237,42 +271,55 @@ public class CharacterMovement : MonoBehaviour
             frameTimer = 0f;
             frameIndex = 0;
 
-            if (runAudioSource != null && runAudioSource.isPlaying)
-            {
+            if (runAudioSource.isPlaying)
                 runAudioSource.Stop();
-            }
         }
+    }
+
+    private void UpdateSpellIcons()
+    {
+        if (fireballIcon != null)
+            fireballIcon.color = fireballCooldownTimer > 0 ? cooldownColor : availableColor;
+
+        if (waterSwordIcon != null)
+            waterSwordIcon.color = waterSwordCooldownTimer > 0 ? cooldownColor : availableColor;
+
+        if (rockShieldIcon != null)
+            rockShieldIcon.color = rockShieldCooldownTimer > 0 ? cooldownColor : availableColor;
+    }
+
+    private void UpdateSpellIconVisibility()
+    {
+        if (fireballIcon != null)
+            fireballIcon.gameObject.SetActive(fireballUnlocked);
+
+        if (waterSwordIcon != null)
+            waterSwordIcon.gameObject.SetActive(waterSwordUnlocked);
+
+        if (rockShieldIcon != null)
+            rockShieldIcon.gameObject.SetActive(rockShieldUnlocked);
     }
 
     private void ShootFireball()
     {
-        if (fireballPrefab == null || firePoint == null)
-            return;
-
-        GameObject fireballObj = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
-        Fireball fireball = fireballObj.GetComponent<Fireball>();
-        if (fireball == null)
-            return;
+        GameObject obj = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+        Fireball fireball = obj.GetComponent<Fireball>();
+        if (fireball == null) return;
 
         float dir = facingRight ? 1f : -1f;
         fireball.Launch(new Vector2(dir, 0f));
         fireball.ownerTag = "Player";
 
-        // Flip the sprite horizontally based on direction
-        Vector3 scale = fireballObj.transform.localScale;
+        Vector3 scale = obj.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * dir;
-        fireballObj.transform.localScale = scale;
+        obj.transform.localScale = scale;
     }
 
     private void SwingWaterSword()
     {
-        if (waterSwordPrefab == null || firePoint == null)
-            return;
-
-        GameObject swordObj = Instantiate(waterSwordPrefab, firePoint.position, Quaternion.identity);
-        WaterSword sword = swordObj.GetComponent<WaterSword>();
-        if (sword == null)
-            return;
+        GameObject obj = Instantiate(waterSwordPrefab, firePoint.position, Quaternion.identity);
+        WaterSword sword = obj.GetComponent<WaterSword>();
+        if (!sword) return;
 
         float dir = facingRight ? 1f : -1f;
         sword.ownerTag = "Player";
@@ -287,23 +334,22 @@ public class CharacterMovement : MonoBehaviour
         transform.localScale = scale;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) => CheckGroundCollision(collision);
-    private void OnCollisionStay2D(Collision2D collision) => CheckGroundCollision(collision);
+    private void OnCollisionEnter2D(Collision2D c) => CheckGround(c);
+    private void OnCollisionStay2D(Collision2D c) => CheckGround(c);
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D c)
     {
-        if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+        if (((1 << c.gameObject.layer) & groundLayer) != 0)
             isGrounded = false;
     }
 
-    private void CheckGroundCollision(Collision2D collision)
+    private void CheckGround(Collision2D c)
     {
-        if (((1 << collision.gameObject.layer) & groundLayer) == 0)
-            return;
+        if (((1 << c.gameObject.layer) & groundLayer) == 0) return;
 
-        foreach (ContactPoint2D contact in collision.contacts)
+        foreach (ContactPoint2D p in c.contacts)
         {
-            if (contact.normal.y > 0.9f && rb.linearVelocity.y <= 0f)
+            if (p.normal.y > 0.9f && rb.linearVelocity.y <= 0f)
             {
                 isGrounded = true;
                 isJumping = false;
@@ -312,26 +358,23 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amt)
     {
-        currentHearts = Mathf.Max(0, currentHearts - amount);
-        if (heartsUI != null)
-            heartsUI.UpdateHearts(currentHearts);
+        currentHearts = Mathf.Max(0, currentHearts - amt);
+        heartsUI?.UpdateHearts(currentHearts);
 
-        if (currentHearts <= 0)
-            Die();
+        if (currentHearts <= 0) Die();
     }
 
-    public void Heal(int amount)
+    public void Heal(int amt)
     {
-        currentHearts = Mathf.Min(maxHearts, currentHearts + amount);
-        if (heartsUI != null)
-            heartsUI.UpdateHearts(currentHearts);
+        currentHearts = Mathf.Min(maxHearts, currentHearts + amt);
+        heartsUI?.UpdateHearts(currentHearts);
     }
 
-    public void Bounce(float bounceForce)
+    public void Bounce(float force)
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
         isJumping = true;
         jumpHeld = false;
     }
@@ -342,8 +385,7 @@ public class CharacterMovement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
 
         currentHearts = maxHearts;
-        if (heartsUI != null)
-            heartsUI.UpdateHearts(currentHearts);
+        heartsUI?.UpdateHearts(currentHearts);
 
         isGrounded = false;
         isJumping = false;
@@ -351,12 +393,8 @@ public class CharacterMovement : MonoBehaviour
         coyoteCounter = coyoteTime;
     }
 
-    public void SetCheckpoint(Vector3 checkpointPosition)
-    {
-        currentCheckpoint = checkpointPosition;
-    }
+    public void SetCheckpoint(Vector3 pos) => currentCheckpoint = pos;
 
-    // Spell system
     public void UnlockSpell(SpellType spell)
     {
         switch (spell)
@@ -374,7 +412,9 @@ public class CharacterMovement : MonoBehaviour
                 PlayerPrefs.SetInt("Spell_RockShield", 1);
                 break;
         }
+
         PlayerPrefs.Save();
+        UpdateSpellIconVisibility();
     }
 
     private void LoadSpellUnlocks()
@@ -383,21 +423,19 @@ public class CharacterMovement : MonoBehaviour
         waterSwordUnlocked = PlayerPrefs.GetInt("Spell_WaterSword", 0) == 1;
         rockShieldUnlocked = PlayerPrefs.GetInt("Spell_RockShield", 0) == 1;
 
-        Debug.Log($"Loaded spells - Fireball: {fireballUnlocked}, WaterSword: {waterSwordUnlocked}, RockShield: {rockShieldUnlocked}");
+        UpdateSpellIconVisibility();
+
+        Debug.Log($"Loaded spells - Fireball:{fireballUnlocked}, WaterSword:{waterSwordUnlocked}, RockShield:{rockShieldUnlocked}");
     }
 
     public bool IsSpellUnlocked(SpellType spell)
     {
-        switch (spell)
+        return spell switch
         {
-            case SpellType.Fireball:
-                return fireballUnlocked;
-            case SpellType.WaterSword:
-                return waterSwordUnlocked;
-            case SpellType.RockShield:
-                return rockShieldUnlocked;
-            default:
-                return false;
-        }
+            SpellType.Fireball => fireballUnlocked,
+            SpellType.WaterSword => waterSwordUnlocked,
+            SpellType.RockShield => rockShieldUnlocked,
+            _ => false
+        };
     }
 }
