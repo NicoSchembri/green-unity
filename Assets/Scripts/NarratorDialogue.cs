@@ -106,6 +106,8 @@ public class NarratorTrigger : MonoBehaviour
 
         isPlayingDialogue = false;
         waitingForInput = false;
+
+        Destroy(gameObject);
     }
 
     private void Update()
