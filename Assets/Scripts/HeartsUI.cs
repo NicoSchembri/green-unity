@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class HeartsUI : MonoBehaviour
 {
     [Header("Heart Settings")]
-    public int maxHearts = 5;
-    public int currentHearts = 5;
+    public int maxHearts = 3;
+    public int currentHearts = 3;
 
     [Header("Sprites")]
     public Sprite fullHeart;
@@ -14,11 +14,26 @@ public class HeartsUI : MonoBehaviour
     [Header("UI References")]
     public Image[] heartImages;
 
+    private void Start()
+    {
+        UpdateHearts(currentHearts);
+    }
+
     public void UpdateHearts(int current)
     {
+        currentHearts = current;
+
         for (int i = 0; i < heartImages.Length; i++)
         {
-            heartImages[i].sprite = (i < current) ? fullHeart : emptyHeart;
+            if (i < maxHearts)
+            {
+                heartImages[i].gameObject.SetActive(true);
+                heartImages[i].sprite = (i < current) ? fullHeart : emptyHeart;
+            }
+            else
+            {
+                heartImages[i].gameObject.SetActive(false);
+            }
         }
     }
 
