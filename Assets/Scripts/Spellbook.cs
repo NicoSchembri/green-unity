@@ -37,8 +37,10 @@ public class SpellBook : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         col.isTrigger = true;
 
+        // Load unlock state from PlayerPrefs
         isUnlocked = PlayerPrefs.GetInt(GetKey(), 0) == 1;
 
+        // Hide the book if already unlocked
         if (isUnlocked && hideAfterUnlock)
         {
             sr.enabled = false;
@@ -48,15 +50,22 @@ public class SpellBook : MonoBehaviour
 
     void Update()
     {
+        // Unlock spell when player presses Enter and is in range
         if (playerInRange && !isUnlocked && Input.GetKeyDown(KeyCode.Return))
         {
             UnlockSpell();
         }
 
+        // Keep the prompt above the book
         if (promptInstance != null)
         {
-            promptInstance.transform.position =
-                transform.position + Vector3.up * promptOffset;
+            promptInstance.transform.position = transform.position + Vector3.up * promptOffset;
+        }
+
+        // Hide prompt if the spell was unlocked while the player is still in range
+        if (playerInRange && isUnlocked && promptInstance != null)
+        {
+            HidePrompt();
         }
     }
 
@@ -65,6 +74,8 @@ public class SpellBook : MonoBehaviour
         if (!c.CompareTag("Player")) return;
 
         playerInRange = true;
+
+        // Show prompt only if not unlocked
         if (!isUnlocked)
             ShowPrompt();
     }
@@ -79,9 +90,7 @@ public class SpellBook : MonoBehaviour
 
     private void UnlockSpell()
     {
-        CharacterMovement player =
-            GameObject.FindGameObjectWithTag("Player")?.GetComponent<CharacterMovement>();
-
+        CharacterMovement player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<CharacterMovement>();
         if (player == null)
         {
             Debug.LogError("SpellBook: Player not found!");
@@ -103,11 +112,13 @@ public class SpellBook : MonoBehaviour
                 break;
         }
 
+        isUnlocked = true;
+
+        // Save unlock state
         PlayerPrefs.SetInt(GetKey(), 1);
         PlayerPrefs.Save();
 
-        isUnlocked = true;
-
+        // Play unlock sound
         if (unlockSound != null)
             AudioSource.PlayClipAtPoint(unlockSound, transform.position);
 
@@ -115,6 +126,7 @@ public class SpellBook : MonoBehaviour
 
         HidePrompt();
 
+        // Hide the book if needed
         if (hideAfterUnlock)
         {
             sr.enabled = false;
@@ -124,8 +136,7 @@ public class SpellBook : MonoBehaviour
 
     private void ShowPrompt()
     {
-        if (promptPrefab == null || promptInstance != null)
-            return;
+        if (promptPrefab == null || promptInstance != null) return;
 
         promptInstance = Instantiate(
             promptPrefab,

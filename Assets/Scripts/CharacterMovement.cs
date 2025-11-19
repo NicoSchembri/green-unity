@@ -18,8 +18,8 @@ public class CharacterMovement : MonoBehaviour
     public float coyoteTime = 0.1f;
 
     [Header("Health")]
-    public int maxHearts = 5;
-    public int currentHearts = 5;
+    public int maxHearts = 3;
+    public int currentHearts = 3;
     public HeartsUI heartsUI;
 
     [Header("Audio")]
@@ -88,6 +88,16 @@ public class CharacterMovement : MonoBehaviour
 
     private GameObject activeRockShield;
 
+    void Awake()
+    {
+        PlayerPrefs.SetInt("Spell_Fireball", 0);
+        PlayerPrefs.SetInt("Spell_WaterSword", 0);
+        PlayerPrefs.SetInt("Spell_RockShield", 0);
+        PlayerPrefs.Save();
+
+        Debug.Log("Spells reset in Awake.");
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -107,18 +117,19 @@ public class CharacterMovement : MonoBehaviour
         }
 
         if (heartsUI != null)
+        {
+            heartsUI.maxHearts = maxHearts;
+            heartsUI.currentHearts = currentHearts;
             heartsUI.UpdateHearts(currentHearts);
+        }
 
         sr.sprite = idleSprite;
 
-        PlayerPrefs.SetInt("Spell_Fireball", 0);
-        PlayerPrefs.SetInt("Spell_WaterSword", 0);
-        PlayerPrefs.SetInt("Spell_RockShield", 0);
-        PlayerPrefs.Save();
-
+        // Load spell unlocks
         LoadSpellUnlocks();
         UpdateSpellIconVisibility();
 
+        // Run sound setup
         runAudioSource = gameObject.AddComponent<AudioSource>();
         runAudioSource.loop = true;
         runAudioSource.playOnAwake = false;
@@ -406,10 +417,28 @@ public class CharacterMovement : MonoBehaviour
             case SpellType.WaterSword:
                 waterSwordUnlocked = true;
                 PlayerPrefs.SetInt("Spell_WaterSword", 1);
+                // Add 1 heart when unlocking Water Sword
+                maxHearts++;
+                currentHearts++;
+                if (heartsUI != null)
+                {
+                    heartsUI.maxHearts = maxHearts;
+                    heartsUI.UpdateHearts(currentHearts);
+                }
+                Debug.Log("Water Sword unlocked! Max hearts increased to " + maxHearts);
                 break;
             case SpellType.RockShield:
                 rockShieldUnlocked = true;
                 PlayerPrefs.SetInt("Spell_RockShield", 1);
+                // Add 1 heart when unlocking Rock Shield
+                maxHearts++;
+                currentHearts++;
+                if (heartsUI != null)
+                {
+                    heartsUI.maxHearts = maxHearts;
+                    heartsUI.UpdateHearts(currentHearts);
+                }
+                Debug.Log("Rock Shield unlocked! Max hearts increased to " + maxHearts);
                 break;
         }
 

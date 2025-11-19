@@ -5,16 +5,16 @@ using UnityEngine;
 public class RockShield : MonoBehaviour
 {
     [Header("Settings")]
-    public int maxDurability = 3;      
-    public float shieldDistance = 1f;     
-    public string ownerTag;              
+    public int maxDurability = 3;
+    public float shieldDistance = 1f;
+    public string ownerTag;
 
     private int currentDurability;
     private Collider2D col;
     private SpriteRenderer sr;
-    private Transform owner;     
-    private Transform firePoint; 
-    private Vector2 dir;         
+    private Transform owner;
+    private Transform firePoint;
+    private Vector2 dir;
 
     private void Awake()
     {
@@ -63,6 +63,15 @@ public class RockShield : MonoBehaviour
         {
             Destroy(collision.gameObject);
             TakeDamage(1);
+            return;
+        }
+
+        Arrow arrow = collision.GetComponent<Arrow>();
+        if (arrow != null)
+        {
+            Destroy(collision.gameObject); 
+            TakeDamage(1);
+            return;
         }
     }
 

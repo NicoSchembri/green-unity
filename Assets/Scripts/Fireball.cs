@@ -60,7 +60,15 @@ public class Fireball : MonoBehaviour
 
         if (ownerTag == "Player" && collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
+            BossController boss = collision.GetComponent<BossController>();
+            if (boss != null)
+            {
+                boss.TakeDamage(damage);
+            }
+            else
+            {
+                Destroy(collision.gameObject); 
+            }
             shouldDestroy = true;
         }
         else if (ownerTag == "Enemy" && collision.CompareTag("Player"))
@@ -76,8 +84,6 @@ public class Fireball : MonoBehaviour
         }
 
         if (shouldDestroy)
-        {
             Destroy(gameObject);
-        }
     }
 }

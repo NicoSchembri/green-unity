@@ -6,14 +6,18 @@ public class WaterSword : MonoBehaviour
 {
     [Header("Settings")]
     public int damage = 1;
-    public float duration = 0.3f;      
-    public float swingDistance = 1.2f;  
+    public float duration = 0.3f;
+    public float swingDistance = 1.2f;
     public string ownerTag;
+
+    [Header("Offsets")]
+    public Vector2 playerOffset = Vector2.zero;
+    public Vector2 bossOffset = new Vector2(1f, 0.5f);
 
     private Collider2D col;
     private SpriteRenderer sr;
-    private Transform owner;             
-    private Vector2 dir;               
+    private Transform owner;
+    private Vector2 dir;
 
     private void Awake()
     {
@@ -27,15 +31,25 @@ public class WaterSword : MonoBehaviour
         owner = ownerTransform;
         dir = swingDir.normalized;
 
-        // Initial placement
-        transform.position = owner.position + (Vector3)(dir * swingDistance);
+        Vector2 offset = Vector2.zero;
+
+        if (ownerTag == "Player")
+            offset = playerOffset;
+        else if (ownerTag == "Enemy")
+        {
+            offset = bossOffset;
+            offset.x *= Mathf.Sign(dir.x);
+        }
+
+        transform.position = (Vector2)owner.position + offset + dir * swingDistance;
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * (dir.x < 0 ? -1 : 1);
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(dir.x);
         transform.localScale = scale;
+
         sr.flipX = dir.x < 0;
 
         Destroy(gameObject, duration);
@@ -45,7 +59,17 @@ public class WaterSword : MonoBehaviour
     {
         if (owner != null)
         {
-            transform.position = owner.position + (Vector3)(dir * swingDistance);
+            Vector2 offset = Vector2.zero;
+
+            if (ownerTag == "Player")
+                offset = playerOffset;
+            else if (ownerTag == "Enemy")
+            {
+                offset = bossOffset;
+                offset.x *= Mathf.Sign(dir.x); 
+            }
+
+            transform.position = (Vector2)owner.position + offset + dir * swingDistance;
         }
     }
 
@@ -56,7 +80,11 @@ public class WaterSword : MonoBehaviour
 
         if (ownerTag == "Player" && collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
+            BossController boss = collision.GetComponent<BossController>();
+            if (boss != null)
+                boss.TakeDamage(damage);
+            else
+                Destroy(collision.gameObject);
         }
         else if (ownerTag == "Enemy" && collision.CompareTag("Player"))
         {
