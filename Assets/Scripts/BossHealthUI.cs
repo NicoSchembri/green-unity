@@ -21,24 +21,53 @@ public class BossHealthUI : MonoBehaviour
     public Image healthBarFill;
     public bool changeColorByStage = true;
 
+    [Header("UI Container")]
+    public GameObject uiContainer;
+
     private int currentStage = 1;
     private int maxHealth;
     private int currentHealth;
 
     private void Start()
     {
-        // Hide UI at start and show when boss activates
-        gameObject.SetActive(false);
+        if (uiContainer != null)
+        {
+            uiContainer.SetActive(false);
+        }
+        else
+        {
+            if (healthBar != null) healthBar.gameObject.SetActive(false);
+            if (bossNameText != null) bossNameText.gameObject.SetActive(false);
+            if (stageText != null) stageText.gameObject.SetActive(false);
+        }
     }
 
     public void ShowBossUI()
     {
-        gameObject.SetActive(true);
+        if (uiContainer != null)
+        {
+            uiContainer.SetActive(true);
+        }
+        else
+        {
+            if (healthBar != null) healthBar.gameObject.SetActive(true);
+            if (bossNameText != null) bossNameText.gameObject.SetActive(true);
+            if (stageText != null) stageText.gameObject.SetActive(true);
+        }
     }
 
     public void HideBossUI()
     {
-        gameObject.SetActive(false);
+        if (uiContainer != null)
+        {
+            uiContainer.SetActive(false);
+        }
+        else
+        {
+            if (healthBar != null) healthBar.gameObject.SetActive(false);
+            if (bossNameText != null) bossNameText.gameObject.SetActive(false);
+            if (stageText != null) stageText.gameObject.SetActive(false);
+        }
     }
 
     public void InitializeBoss(int stage, int health)
@@ -46,7 +75,6 @@ public class BossHealthUI : MonoBehaviour
         currentStage = stage;
         maxHealth = health;
         currentHealth = health;
-
         UpdateUI();
     }
 
@@ -55,7 +83,6 @@ public class BossHealthUI : MonoBehaviour
         currentStage = stage;
         currentHealth = health;
         maxHealth = maxHP;
-
         UpdateUI();
     }
 
@@ -87,7 +114,6 @@ public class BossHealthUI : MonoBehaviour
             stageText.text = stageDisplay;
         }
 
-        // Update health bar color based on stage
         if (changeColorByStage && healthBarFill != null)
         {
             healthBarFill.color = currentStage switch

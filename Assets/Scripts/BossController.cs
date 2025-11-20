@@ -1,12 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class BossController : MonoBehaviour
 {
     [Header("Health & Stage")]
-    public int stage1Health = 2;
-    public int stage2Health = 4;
-    public int stage3Health = 6;
+    public int stage1Health = 5;
+    public int stage2Health = 10;
+    public int stage3Health = 15;
     private int currentHealth;
+    private int currentStage = 1;
 
     [Header("Movement")]
     public float moveSpeed = 2f;
@@ -21,13 +23,11 @@ public class BossController : MonoBehaviour
     private float frameTimer;
     private int frameIndex;
 
-    private Transform player;
-    private bool isActive = false;
-
     [Header("Abilities")]
     public GameObject fireballPrefab;
     public GameObject waterSlashPrefab;
     public GameObject lightningPrefab;
+    public Transform firePoint;
     public float fireballCooldown = 2f;
     public float waterSlashCooldown = 3f;
     public float lightningCooldown = 5f;
@@ -35,32 +35,42 @@ public class BossController : MonoBehaviour
     private float waterSlashTimer = 0f;
     private float lightningTimer = 0f;
 
-    private int currentStage = 1;
-
     [Header("Lightning Settings")]
     public float lightningHeight = 5f;
     public float lightningXRange = 2f;
-    public int stage3LightningCount = 2;    // Number of strikes in stage 3
-    public int stage3_5LightningCount = 3;  // Number of strikes in stage 3.5
-    public float multiStrikeDelay = 0.2f;   // Delay between multiple strikes
+    public int stage3LightningCount = 2;
+    public int stage3_5LightningCount = 3;
+    public float multiStrikeDelay = 0.2f;
 
-    [Header("Ability Spawn Points")]
-    public Transform firePoint;
-
-    [Header("UI")]
+    [Header("UI & Dialogue")]
     public BossHealthUI healthUI;
+    public BossDialogueManager dialogueManager;
+
+    [Header("Player Reference")]
+    public Transform player;
+
+    [Header("State")]
+    public bool isActive = false;
+    public bool isFighting = false;
+    public bool invincible = false;
+
+    // Stage flags
+    private bool stage2Done = false;
+    private bool stage3Done = false;
+    private bool defeatDone = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentHealth = stage1Health;
+
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = idleSprite;
 
-        // Initialize health UI
         if (healthUI != null)
         {
             healthUI.InitializeBoss(currentStage, currentHealth);
+            healthUI.HideBossUI();
         }
     }
 
@@ -68,8 +78,12 @@ public class BossController : MonoBehaviour
     {
         if (!isActive || player == null) return;
 
-        HandleMovement();
-        HandleAbilities();
+        if (isFighting)
+        {
+            HandleMovement();
+            HandleAbilities();
+        }
+
         HandleStageProgression();
     }
 
@@ -79,7 +93,6 @@ public class BossController : MonoBehaviour
         float moveAmount = Mathf.Sign(direction.x) * moveSpeed * Time.deltaTime;
         transform.position += new Vector3(moveAmount, 0, 0);
 
-        // Flip using SpriteRenderer instead of scaling
         if (direction.x > 0 && !facingRight) Flip();
         else if (direction.x < 0 && facingRight) Flip();
 
@@ -111,7 +124,6 @@ public class BossController : MonoBehaviour
         facingRight = !facingRight;
         sr.flipX = !facingRight;
 
-        // Flip fire point
         if (firePoint != null)
         {
             Vector3 fp = firePoint.localPosition;
@@ -132,14 +144,11 @@ public class BossController : MonoBehaviour
                 if (fireballTimer >= fireballCooldown) { Fireball(); fireballTimer = 0f; }
                 if (waterSlashTimer >= waterSlashCooldown) { WaterSlash(); waterSlashTimer = 0f; }
                 break;
-
             case 2:
                 if (waterSlashTimer >= waterSlashCooldown) { WaterSlash(); waterSlashTimer = 0f; }
                 if (lightningTimer >= lightningCooldown) { LightningAttack(); lightningTimer = 0f; }
                 break;
-
             case 3:
-                // Stage 3 uses Stage 2's attacks
                 if (waterSlashTimer >= waterSlashCooldown) { WaterSlash(); waterSlashTimer = 0f; }
                 if (lightningTimer >= lightningCooldown)
                 {
@@ -147,8 +156,7 @@ public class BossController : MonoBehaviour
                     lightningTimer = 0f;
                 }
                 break;
-
-            case 4: // Stage 3.5
+            case 4:
                 if (fireballTimer >= fireballCooldown) { Fireball(); fireballTimer = 0f; }
                 if (waterSlashTimer >= waterSlashCooldown) { WaterSlash(); waterSlashTimer = 0f; }
                 if (lightningTimer >= lightningCooldown)
@@ -160,38 +168,126 @@ public class BossController : MonoBehaviour
         }
     }
 
+    private void Fireball()
+    {
+        if (firePoint == null || fireballPrefab == null || player == null) return;
+        Vector2 dir = (player.position - firePoint.position).normalized;
+        GameObject fb = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+        fb.GetComponent<Fireball>().ownerTag = "Enemy";
+        fb.GetComponent<Fireball>().Launch(dir);
+    }
+
+    private void WaterSlash()
+    {
+        if (waterSlashPrefab == null || firePoint == null) return;
+        Vector3 spawnPos = firePoint.position;
+        Vector2 dir = (player.position - transform.position).normalized;
+        dir.y = 0;
+        GameObject ws = Instantiate(waterSlashPrefab, spawnPos, Quaternion.identity);
+        if (ws.TryGetComponent(out WaterSword wsScript))
+        {
+            wsScript.ownerTag = "Enemy";
+            wsScript.Swing(transform, dir);
+        }
+    }
+
+    private void LightningAttack()
+    {
+        if (lightningPrefab == null || player == null) return;
+        float randomX = Random.Range(-lightningXRange, lightningXRange);
+        Vector3 spawnPos = new Vector3(player.position.x + randomX, player.position.y + lightningHeight, 0f);
+        GameObject ln = Instantiate(lightningPrefab, spawnPos, Quaternion.identity);
+        ln.GetComponent<Lightning>()?.Strike(spawnPos, "Enemy", Random.value > 0.5f);
+    }
+
+    private IEnumerator MultiLightningAttack(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            LightningAttack();
+            if (i < count - 1) yield return new WaitForSeconds(multiStrikeDelay);
+        }
+    }
+
     private void HandleStageProgression()
     {
-        if (currentStage == 1 && currentHealth <= 0)
+        if (currentStage == 1 && currentHealth <= 0 && !stage2Done)
         {
-            currentStage = 2;
-            currentHealth = stage2Health;
-            ScaleDifficulty();
-            UpdateHealthUI();
+            stage2Done = true;
+            StartCoroutine(TransitionToStage2());
         }
-        else if (currentStage == 2 && currentHealth <= 0)
+        else if (currentStage == 2 && currentHealth <= 0 && !stage3Done)
         {
-            currentStage = 3;
-            currentHealth = stage3Health;
-            ScaleDifficulty();
-            UpdateHealthUI();
+            stage3Done = true;
+            StartCoroutine(TransitionToStage3());
         }
-        else if (currentStage == 3 && currentHealth <= stage3Health / 2) // Transition to 3.5 at half health
+        else if ((currentStage == 3 || currentStage == 4) && currentHealth <= 0 && !defeatDone)
         {
-            if (currentStage != 4) // Only transition once
-            {
-                currentStage = 4; // Internal stage 3.5
-                ScaleDifficulty();
-                UpdateHealthUI();
-            }
+            defeatDone = true;
+            StartCoroutine(BossDefeatSequence());
         }
+    }
 
-        if (currentHealth <= 0 && (currentStage == 3 || currentStage == 4))
-        {
-            if (healthUI != null)
-                healthUI.HideBossUI();
-            Destroy(gameObject);
-        }
+    public void TakeDamage(int amount)
+    {
+        if (invincible) return;
+        currentHealth -= amount;
+        UpdateHealthUI();
+    }
+
+    private IEnumerator TransitionToStage2()
+    {
+        StopFighting();
+        if (dialogueManager != null)
+            yield return StartCoroutine(dialogueManager.PlayStage2Dialogue());
+
+        currentStage = 2;
+        currentHealth = stage2Health;
+        ScaleDifficulty();
+        UpdateHealthUI();
+        ResumeFighting();
+    }
+
+    private IEnumerator TransitionToStage3()
+    {
+        StopFighting();
+        if (dialogueManager != null)
+            yield return StartCoroutine(dialogueManager.PlayStage3Dialogue());
+
+        currentStage = 3;
+        currentHealth = stage3Health;
+        ScaleDifficulty();
+        UpdateHealthUI();
+        ResumeFighting();
+    }
+
+    private IEnumerator BossDefeatSequence()
+    {
+        StopFighting();
+        if (dialogueManager != null)
+            yield return StartCoroutine(dialogueManager.PlayDefeatDialogue());
+
+        healthUI?.HideBossUI();
+        Destroy(gameObject);
+    }
+
+    public void StopFighting()
+    {
+        isFighting = false;
+        invincible = true;
+        sr.sprite = idleSprite;
+    }
+
+    public void ResumeFighting()
+    {
+        isFighting = true;
+        invincible = false;
+    }
+
+    public void ActivateBoss()
+    {
+        isActive = true;
+        healthUI?.ShowBossUI();
     }
 
     private void ScaleDifficulty()
@@ -202,115 +298,18 @@ public class BossController : MonoBehaviour
         lightningCooldown /= stageMultiplier;
     }
 
-    private void Fireball()
-    {
-        if (firePoint == null || fireballPrefab == null || player == null) return;
-
-        Vector2 dir = (player.position - firePoint.position).normalized;
-
-        GameObject fb = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
-        Fireball fbScript = fb.GetComponent<Fireball>();
-        fbScript.ownerTag = "Enemy";
-
-        fbScript.Launch(dir);
-    }
-
-    private void WaterSlash()
-    {
-        if (waterSlashPrefab == null) return;
-
-        Vector3 spawnPos = (firePoint != null) ? firePoint.position : transform.position;
-
-        Vector2 dir = (player.position - transform.position).normalized;
-        dir.y = 0;
-
-        GameObject ws = Instantiate(waterSlashPrefab, spawnPos, Quaternion.identity);
-        WaterSword wsScript = ws.GetComponent<WaterSword>();
-        if (wsScript != null)
-        {
-            wsScript.ownerTag = "Enemy";
-            wsScript.Swing(transform, dir);
-        }
-    }
-
-    private void LightningAttack()
-    {
-        if (lightningPrefab == null || player == null) return;
-
-        float randomX = Random.Range(-lightningXRange, lightningXRange);
-        Vector3 spawnPos = new Vector3(player.position.x + randomX, player.position.y + lightningHeight, 0f);
-
-        GameObject ln = Instantiate(lightningPrefab, spawnPos, Quaternion.identity);
-        Lightning lnScript = ln.GetComponent<Lightning>();
-        if (lnScript != null)
-        {
-            lnScript.Strike(spawnPos, "Enemy", false);
-        }
-    }
-
-    private System.Collections.IEnumerator MultiLightningAttack(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            SpawnSingleLightning();
-            if (i < count - 1) // Don't delay after the last strike
-            {
-                yield return new WaitForSeconds(multiStrikeDelay);
-            }
-        }
-    }
-
-    private void SpawnSingleLightning()
-    {
-        if (lightningPrefab == null || player == null) return;
-
-        // Random position around player
-        float randomX = Random.Range(-lightningXRange, lightningXRange);
-        Vector3 spawnPos = new Vector3(
-            player.position.x + randomX,
-            player.position.y + lightningHeight,
-            0f
-        );
-
-        // Random flip for variety
-        bool shouldFlip = Random.value > 0.5f;
-
-        GameObject ln = Instantiate(lightningPrefab, spawnPos, Quaternion.identity);
-        Lightning lnScript = ln.GetComponent<Lightning>();
-        if (lnScript != null)
-        {
-            lnScript.Strike(spawnPos, "Enemy", shouldFlip);
-        }
-    }
-
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        UpdateHealthUI();
-    }
-
-    public void ActivateBoss()
-    {
-        isActive = true;
-        if (healthUI != null)
-        {
-            healthUI.ShowBossUI();
-        }
-    }
-
     private void UpdateHealthUI()
     {
-        if (healthUI != null)
-        {
-            int maxHP = currentStage switch
-            {
-                1 => stage1Health,
-                2 => stage2Health,
-                3 or 4 => stage3Health, // Both use same max health
-                _ => stage1Health
-            };
+        if (healthUI == null) return;
 
-            healthUI.UpdateBossHealth(currentStage, currentHealth, maxHP);
-        }
+        int maxHP = currentStage switch
+        {
+            1 => stage1Health,
+            2 => stage2Health,
+            3 or 4 => stage3Health,
+            _ => stage1Health
+        };
+
+        healthUI.UpdateBossHealth(currentStage, currentHealth, maxHP);
     }
 }
