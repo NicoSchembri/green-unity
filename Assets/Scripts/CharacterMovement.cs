@@ -417,26 +417,23 @@ public class CharacterMovement : MonoBehaviour
             case SpellType.WaterSword:
                 waterSwordUnlocked = true;
                 PlayerPrefs.SetInt("Spell_WaterSword", 1);
-                // Add 1 heart when unlocking Water Sword
                 maxHearts++;
-                currentHearts++;
                 if (heartsUI != null)
                 {
                     heartsUI.maxHearts = maxHearts;
-                    heartsUI.UpdateHearts(currentHearts);
+                    heartsUI.UpdateHearts(currentHearts); 
                 }
                 Debug.Log("Water Sword unlocked! Max hearts increased to " + maxHearts);
                 break;
             case SpellType.RockShield:
                 rockShieldUnlocked = true;
                 PlayerPrefs.SetInt("Spell_RockShield", 1);
-                // Add 1 heart when unlocking Rock Shield
+                
                 maxHearts++;
-                currentHearts++;
                 if (heartsUI != null)
                 {
                     heartsUI.maxHearts = maxHearts;
-                    heartsUI.UpdateHearts(currentHearts);
+                    heartsUI.UpdateHearts(currentHearts); 
                 }
                 Debug.Log("Rock Shield unlocked! Max hearts increased to " + maxHearts);
                 break;
