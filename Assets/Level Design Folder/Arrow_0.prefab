@@ -180,4 +180,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Arrow
   speed: 5
   damage: 1
-  lifetime: 5
+  lifetime: 3
