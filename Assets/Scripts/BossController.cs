@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
@@ -264,11 +265,19 @@ public class BossController : MonoBehaviour
     private IEnumerator BossDefeatSequence()
     {
         StopFighting();
+
         if (dialogueManager != null)
             yield return StartCoroutine(dialogueManager.PlayDefeatDialogue());
 
         healthUI?.HideBossUI();
+
+        // Small delay so effects can finish
+        yield return new WaitForSeconds(1f);
+
         Destroy(gameObject);
+
+        // Load End Screen
+        SceneManager.LoadScene("EndScreen");
     }
 
     public void StopFighting()
