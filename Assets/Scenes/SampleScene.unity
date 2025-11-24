@@ -3716,6 +3716,7 @@ MonoBehaviour:
   stage3Color: {r: 1, g: 0, b: 0, a: 1}
   healthBarFill: {fileID: 99427173}
   changeColorByStage: 1
+  uiContainer: {fileID: 0}
 --- !u!1 &1598603292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5277,6 +5278,10 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 1559556490}
+    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: multiStrikeDelay
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
       propertyPath: m_LocalPosition.x
       value: -59.16

@@ -665,6 +665,82 @@ MonoBehaviour:
   pausePlayerMovement: 1
   dialoguePanel: {fileID: 885219468}
   dialogueText: {fileID: 1034758437}
+--- !u!1001 &86897639
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2062259928672189744, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_Name
+      value: BossIdle_0 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1743055454}
+    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: healthUI
+      value: 
+      objectReference: {fileID: 94157440}
+    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 1743055455}
+    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: multiStrikeDelay
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 123.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2062259928672189744, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743055455}
+  m_SourcePrefab: {fileID: 100100000, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
 --- !u!1 &89325672
 GameObject:
   m_ObjectHideFlags: 0
@@ -18617,43 +18693,6 @@ Transform:
   - {fileID: 1443458135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1281099096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8920187342462794539, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-  m_PrefabInstance: {fileID: 1923341857}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1281099101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281099096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed988146e0c374447880843006f80b49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossDialogueManager
-  dialoguePanel: {fileID: 885219468}
-  dialogueText: {fileID: 1034758437}
-  introDialogue:
-  - 'Boss: So, you''ve made it this far...'
-  - 'Frog: I''m here to restore peace to the kingdom!'
-  - 'Boss: We''ll see about that. Prepare yourself!'
-  stage2Dialogue:
-  - 'Boss: Impressive... but I''m just getting started!'
-  - 'Frog: I won''t give up!'
-  - 'Boss: Then face my true power!'
-  stage3Dialogue:
-  - 'Boss: You''re stronger than I thought...'
-  - 'Frog: It''s over! Surrender now!'
-  - 'Boss: Never! This is my final stand!'
-  defeatDialogue:
-  - 'Boss: I... I can''t believe it...'
-  - 'Frog: The kingdom is saved!'
-  - 'Boss: You have... truly earned this victory...'
-  - The kingdom thanks you, hero.
-  player: {fileID: 783493564}
 --- !u!1001 &1289282322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21113,6 +21152,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728865610}
   m_CullTransparentMesh: 1
+--- !u!1 &1743055449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2062259928672189744, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+  m_PrefabInstance: {fileID: 86897639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1743055454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+  m_PrefabInstance: {fileID: 86897639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1743055455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743055449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed988146e0c374447880843006f80b49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossDialogueManager
+  dialoguePanel: {fileID: 885219468}
+  dialogueText: {fileID: 1034758437}
+  introDialogue:
+  - 'Boss: So, you''ve made it this far...'
+  - 'Frog: I''m here to restore peace to the kingdom!'
+  - 'Boss: We''ll see about that. Prepare yourself!'
+  stage2Dialogue:
+  - 'Boss: Impressive... but I''m just getting started!'
+  - 'Frog: I won''t give up!'
+  - 'Boss: Then face my true power!'
+  stage3Dialogue:
+  - 'Boss: You''re stronger than I thought...'
+  - 'Frog: It''s over! Surrender now!'
+  - 'Boss: Never! This is my final stand!'
+  defeatDialogue:
+  - 'Boss: I... I can''t believe it...'
+  - 'Frog: The kingdom is saved!'
+  - 'Boss: You have... truly earned this victory...'
+  - The kingdom thanks you, hero.
+  player: {fileID: 783493564}
 --- !u!1 &1748407422
 GameObject:
   m_ObjectHideFlags: 0
@@ -23186,126 +23267,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &1923341857
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1126776698574900905, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2062259928672189744, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_Name
-      value: BossIdle_0 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: healthUI
-      value: 
-      objectReference: {fileID: 94157440}
-    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: dialogueManager
-      value: 
-      objectReference: {fileID: 1281099101}
-    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: multiStrikeDelay
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: stage3LightningCount
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: stage3_5LightningCount
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: dialogueManager
-      value: 
-      objectReference: {fileID: 1281099101}
-    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: invisibleWalls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: 'invisibleWalls.Array.data[0]'
-      value: 
-      objectReference: {fileID: 341690830}
-    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: 'invisibleWalls.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1937066659}
-    - target: {fileID: 5666152619306286480, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 110.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8920187342462794539, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1281099101}
-  m_SourcePrefab: {fileID: 100100000, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
 --- !u!1 &1933889685
 GameObject:
   m_ObjectHideFlags: 0
@@ -25062,10 +25023,10 @@ SceneRoots:
   - {fileID: 36715960}
   - {fileID: 857315538}
   - {fileID: 2052749506}
-  - {fileID: 1923341857}
   - {fileID: 341690832}
   - {fileID: 1937066661}
   - {fileID: 28204160}
   - {fileID: 678688176}
   - {fileID: 2037155696}
   - {fileID: 1405559100}
+  - {fileID: 86897639}
