@@ -151,10 +151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0089aade6ed99a4c9d3b4c5a7e9917b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaterSword
-  damage: 1
+  damage: 2
   duration: 0.3
   swingDistance: 1.2
   ownerTag: Player
+  playerOffset: {x: 0, y: 0}
+  bossOffset: {x: 1, y: 0.5}
+  swingSound: {fileID: 8300000, guid: fc5a75bd7db56764096ab7ea15084982, type: 3}
+  swingVolume: 0.432
 --- !u!50 &4737674887224969370
 Rigidbody2D:
   serializedVersion: 5

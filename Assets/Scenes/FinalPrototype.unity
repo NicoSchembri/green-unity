@@ -600,6 +600,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 94157440}
     - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: fireballPrefab
+      value: 
+      objectReference: {fileID: 8679725442693165356, guid: 6d8634d52e8ba2946a9515932dd086c9, type: 3}
+    - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 1743055455}
@@ -21495,7 +21499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11, y: 0}
+  m_AnchoredPosition: {x: -2, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1743055449 stripped
@@ -21842,21 +21846,41 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: afafa8a84d13c694bae682802ebd959d, type: 3}
+    - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
       propertyPath: fireballIcon
       value: 
       objectReference: {fileID: 1527746550}
+    - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: maxJumpForce
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
       propertyPath: currentHearts
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: fireballPrefab
+      value: 
+      objectReference: {fileID: 8679725442693165356, guid: 6d8634d52e8ba2946a9515932dd086c9, type: 3}
+    - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
       propertyPath: rockShieldIcon
       value: 
       objectReference: {fileID: 67454604}
     - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: runSoundVolume
+      value: 0.686
+      objectReference: {fileID: 0}
+    - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
       propertyPath: waterSwordIcon
       value: 
       objectReference: {fileID: 1749717009}
+    - target: {fileID: 5730174812674538744, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
+      propertyPath: damageSoundVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7489996479839335517, guid: 42937fc90fe079f4fa4cb69b7fa43198, type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -14,16 +14,28 @@ public class WaterSword : MonoBehaviour
     public Vector2 playerOffset = Vector2.zero;
     public Vector2 bossOffset = new Vector2(1f, 0.5f);
 
+    [Header("Audio")]
+    public AudioClip swingSound;
+    [Range(0f, 1f)] public float swingVolume = 1f;
+
     private Collider2D col;
     private SpriteRenderer sr;
     private Transform owner;
     private Vector2 dir;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
         col.isTrigger = true;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
     }
 
     public void Swing(Transform ownerTransform, Vector2 swingDir)
@@ -52,6 +64,9 @@ public class WaterSword : MonoBehaviour
 
         sr.flipX = dir.x < 0;
 
+        if (swingSound != null && audioSource != null)
+            audioSource.PlayOneShot(swingSound, swingVolume);
+
         Destroy(gameObject, duration);
     }
 
@@ -66,7 +81,7 @@ public class WaterSword : MonoBehaviour
             else if (ownerTag == "Enemy")
             {
                 offset = bossOffset;
-                offset.x *= Mathf.Sign(dir.x); 
+                offset.x *= Mathf.Sign(dir.x);
             }
 
             transform.position = (Vector2)owner.position + offset + dir * swingDistance;

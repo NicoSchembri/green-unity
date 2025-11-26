@@ -6,24 +6,24 @@ public class Lightning : MonoBehaviour
 {
     [Header("Settings")]
     public int damage = 1;
-    public float warningDuration = 0.5f; 
-    public float activeDuration = 1f;    
-    public float strikeSpeed = 20f;      
+    public float warningDuration = 0.5f;
+    public float activeDuration = 1f;
+    public float strikeSpeed = 20f;
     public string ownerTag;
 
     [Header("Visual Settings")]
-    public Color warningColor = new Color(1f, 1f, 0f, 0.5f); 
+    public Color warningColor = new Color(1f, 1f, 0f, 0.5f);
     public Color strikeColor = Color.white;
+
+    [Header("Audio")]
+    public AudioClip strikeSound;
+    [Range(0f, 1f)] public float audioVolume = 1f;
 
     private Collider2D col;
     private SpriteRenderer sr;
-    private bool hasStruck = false;
     private bool isActive = false;
-    private bool isStriking = false;
 
-    private Vector3 startPosition;
-    private Vector3 targetPosition;
-    private float strikeTimer = 0f;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -31,13 +31,17 @@ public class Lightning : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         col.isTrigger = true;
         col.enabled = false;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
     }
 
     public void Strike(Vector3 spawnPosition, string owner, bool flipX = false)
     {
         ownerTag = owner;
-        startPosition = spawnPosition;
-        targetPosition = spawnPosition; 
         transform.position = spawnPosition;
         sr.flipX = flipX;
 
@@ -48,18 +52,20 @@ public class Lightning : MonoBehaviour
 
     private void StartStrike()
     {
-        isStriking = true;
         isActive = true;
         col.enabled = true;
         sr.color = strikeColor;
+
+        // strike sound
+        if (strikeSound != null)
+            audioSource.PlayOneShot(strikeSound, audioVolume);
 
         Invoke(nameof(FadeAndDestroy), activeDuration);
     }
 
     private void FadeAndDestroy()
     {
-        col.enabled = false; 
-
+        col.enabled = false;
         StartCoroutine(FadeOut());
     }
 
@@ -83,37 +89,21 @@ public class Lightning : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isActive)
-        {
-            Debug.Log("Lightning not active yet");
             return;
-        }
 
         if (collision.CompareTag(ownerTag))
-        {
-            Debug.Log($"Ignoring collision with owner: {ownerTag}");
             return;
-        }
 
-        Debug.Log($"Lightning hit: {collision.gameObject.name}, Tag: {collision.tag}, OwnerTag: {ownerTag}");
 
         if (ownerTag == "Player" && collision.CompareTag("Enemy"))
         {
-            Debug.Log("Lightning damaged enemy");
             Destroy(collision.gameObject);
         }
         else if (ownerTag == "Enemy" && collision.CompareTag("Player"))
         {
-            Debug.Log("Lightning hit player, attempting damage");
             CharacterMovement character = collision.GetComponent<CharacterMovement>();
             if (character != null)
-            {
-                Debug.Log($"Dealing {damage} damage to player");
                 character.TakeDamage(damage);
-            }
-            else
-            {
-                Debug.LogError("CharacterMovement component not found on player!");
-            }
         }
     }
 

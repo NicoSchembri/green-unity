@@ -12,12 +12,26 @@ public class ArrowTrap : MonoBehaviour
     public GameObject arrowPrefab;
     public Transform firePoint;
     public Vector2 shootDirection = Vector2.right;
-    public float shootDelay = 0.1f;      
-    public int arrowCount = 1;           
-    public float arrowInterval = 0.15f;  
-    public float shootCooldown = 2f;    
+    public float shootDelay = 0.1f;
+    public int arrowCount = 1;
+    public float arrowInterval = 0.15f;
+    public float shootCooldown = 2f;
 
+    [Header("Audio")]
+    public AudioClip shootSound;   // When arrow fires
+    [Range(0f, 1f)] public float audioVolume = 1f;
+
+    private AudioSource audioSource;
     private bool isShooting = false;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+    }
 
     void Start()
     {
@@ -42,7 +56,6 @@ public class ArrowTrap : MonoBehaviour
             if (hit.gameObject == gameObject) continue;
             if (!hit.CompareTag(playerTag)) continue;
 
-            Debug.Log($"ArrowTrap triggered by: {hit.name}");
             StartCoroutine(ShootBurst());
             break;
         }
@@ -75,11 +88,10 @@ public class ArrowTrap : MonoBehaviour
 
         Arrow arrowScript = arrow.GetComponent<Arrow>();
         if (arrowScript != null)
-        {
             arrowScript.SetDirection(shootDirection.normalized);
-        }
 
-        Debug.Log("ArrowTrap fired an arrow!");
+        if (shootSound != null)
+            audioSource.PlayOneShot(shootSound, audioVolume);
     }
 
     void OnDrawGizmosSelected()

@@ -27,6 +27,9 @@ public class CharacterMovement : MonoBehaviour
     public AudioClip runSound;
     [Range(0f, 1f)]
     public float runSoundVolume = 1f;
+    public AudioClip damageSound;
+    [Range(0f, 1f)]
+    public float damageSoundVolume = 1f;
 
     [Header("Fireball Settings")]
     public GameObject fireballPrefab;
@@ -374,6 +377,9 @@ public class CharacterMovement : MonoBehaviour
         currentHearts = Mathf.Max(0, currentHearts - amt);
         heartsUI?.UpdateHearts(currentHearts);
 
+        if (damageSound != null)
+            AudioSource.PlayClipAtPoint(damageSound, transform.position, damageSoundVolume);
+
         if (currentHearts <= 0) Die();
     }
 
@@ -417,24 +423,34 @@ public class CharacterMovement : MonoBehaviour
             case SpellType.WaterSword:
                 waterSwordUnlocked = true;
                 PlayerPrefs.SetInt("Spell_WaterSword", 1);
+
                 maxHearts++;
+                currentHearts = maxHearts;
+
                 if (heartsUI != null)
                 {
                     heartsUI.maxHearts = maxHearts;
-                    heartsUI.UpdateHearts(currentHearts); 
+                    heartsUI.currentHearts = currentHearts;
+                    heartsUI.UpdateHearts(currentHearts);
                 }
+
                 Debug.Log("Water Sword unlocked! Max hearts increased to " + maxHearts);
                 break;
+
             case SpellType.RockShield:
                 rockShieldUnlocked = true;
                 PlayerPrefs.SetInt("Spell_RockShield", 1);
-                
+
                 maxHearts++;
+                currentHearts = maxHearts;
+
                 if (heartsUI != null)
                 {
                     heartsUI.maxHearts = maxHearts;
-                    heartsUI.UpdateHearts(currentHearts); 
+                    heartsUI.currentHearts = currentHearts;
+                    heartsUI.UpdateHearts(currentHearts);
                 }
+
                 Debug.Log("Rock Shield unlocked! Max hearts increased to " + maxHearts);
                 break;
         }

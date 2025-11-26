@@ -104,11 +104,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0faf8c76baff0964bbf895f0a8bca2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrowTrap
+  detectionBoxSize: {x: 6, y: 3}
+  detectionBoxOffset: {x: 0, y: 0}
+  playerTag: Player
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   arrowPrefab: {fileID: 0}
   firePoint: {fileID: 0}
   shootDirection: {x: 1, y: 0}
-  shootInterval: 2
-  initialDelay: 0
+  shootDelay: 0.1
+  arrowCount: 1
+  arrowInterval: 0.15
+  shootCooldown: 2
+  shootSound: {fileID: 8300000, guid: 46251beb6371af14291523b99c427d15, type: 3}
+  audioVolume: 0.481
 --- !u!1 &7743780321193617593
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,3 +181,6 @@ MonoBehaviour:
   maxDurability: 3
   shieldDistance: 1
   ownerTag: Player
+  activateSound: {fileID: 8300000, guid: 7d9dbab6e9ed2b04cbd2cc1e491442ff, type: 3}
+  hitSound: {fileID: 8300000, guid: 1d73bd2173ac1df4f81cec6c90abf62d, type: 3}
+  audioVolume: 0.6

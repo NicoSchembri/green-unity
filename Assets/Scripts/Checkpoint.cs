@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D))]
 public class Checkpoint : MonoBehaviour
 {
     [Header("CheckPoint Settings")]
@@ -16,6 +16,11 @@ public class Checkpoint : MonoBehaviour
             if (player != null)
             {
                 player.SetCheckpoint(transform.position);
+
+                player.currentHearts = player.maxHearts;
+                player.heartsUI?.UpdateHearts(player.currentHearts);
+
+                Debug.Log("Checkpoint reached! Fully healed.");
             }
         }
     }
