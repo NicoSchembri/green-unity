@@ -611,6 +611,18 @@ PrefabInstance:
       propertyPath: multiStrikeDelay
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: invisibleWalls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: 'invisibleWalls.Array.data[0]'
+      value: 
+      objectReference: {fileID: 341690830}
+    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: 'invisibleWalls.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1937066659}
     - target: {fileID: 7296077949577924665, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 96.8
@@ -1641,7 +1653,7 @@ Transform:
   m_GameObject: {fileID: 341690830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.92, y: 7.99, z: 0}
+  m_LocalPosition: {x: 66.82, y: 7.99, z: 0}
   m_LocalScale: {x: 1, y: 24.855654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24089,7 +24101,7 @@ Transform:
   m_GameObject: {fileID: 1937066659}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 122.41, y: 7.99, z: 0}
+  m_LocalPosition: {x: 132.84, y: 7.99, z: 0}
   m_LocalScale: {x: 1, y: 24.855654, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
