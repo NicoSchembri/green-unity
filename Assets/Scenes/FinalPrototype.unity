@@ -602,7 +602,7 @@ PrefabInstance:
     - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
       propertyPath: fireballPrefab
       value: 
-      objectReference: {fileID: 8679725442693165356, guid: 6d8634d52e8ba2946a9515932dd086c9, type: 3}
+      objectReference: {fileID: 615067537465265179, guid: 0783608c46b97bb418134a58e362f05d, type: 3}
     - target: {fileID: 4560088097256580057, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
       propertyPath: dialogueManager
       value: 
