@@ -4727,7 +4727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5546165820427830690, guid: 07fa626b0e86f7c41ab757b3d653ebc4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.16
+      value: 9.83
       objectReference: {fileID: 0}
     - target: {fileID: 5546165820427830690, guid: 07fa626b0e86f7c41ab757b3d653ebc4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5177,11 +5177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7049930628527211067, guid: d4e348b77fe266647b99393557e93738, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.29
+      value: -24.48
       objectReference: {fileID: 0}
     - target: {fileID: 7049930628527211067, guid: d4e348b77fe266647b99393557e93738, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.4
+      value: -2.85
       objectReference: {fileID: 0}
     - target: {fileID: 7049930628527211067, guid: d4e348b77fe266647b99393557e93738, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5215,6 +5215,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8270020293598572864, guid: d4e348b77fe266647b99393557e93738, type: 3}
+      propertyPath: checkpointSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b5b066aa467f65a4ab602b15aa45cfa2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
