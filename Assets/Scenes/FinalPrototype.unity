@@ -797,6 +797,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 1743055455}
+    - target: {fileID: 5029541072909926691, guid: ac246c19074ecd041902dbbfe05d8dae, type: 3}
       propertyPath: invisibleWalls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -5781,6 +5785,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1860740917988904360, guid: aa1a773558a1d8d4986fba5d1176301b, type: 3}
+      propertyPath: m_text
+      value: Press F to activate
+      objectReference: {fileID: 0}
     - target: {fileID: 4049578943170695280, guid: aa1a773558a1d8d4986fba5d1176301b, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -19663,6 +19671,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterSpellBook
       objectReference: {fileID: 0}
+    - target: {fileID: 4767962011741584100, guid: 97b119eb874f1b14995627cf7d94a162, type: 3}
+      propertyPath: m_text
+      value: Press F to activate
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25169,6 +25181,10 @@ PrefabInstance:
     - target: {fileID: 3873053970698848728, guid: cc3e40d555fcce1478cada7598b3fe19, type: 3}
       propertyPath: m_Name
       value: FireSpellBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 6409772160513335015, guid: cc3e40d555fcce1478cada7598b3fe19, type: 3}
+      propertyPath: m_text
+      value: Press F to activate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
