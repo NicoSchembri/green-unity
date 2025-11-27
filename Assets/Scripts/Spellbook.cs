@@ -50,8 +50,8 @@ public class SpellBook : MonoBehaviour
 
     void Update()
     {
-        // Unlock spell when player presses Enter and is in range
-        if (playerInRange && !isUnlocked && Input.GetKeyDown(KeyCode.Return))
+        // Unlock spell when player presses f and is in range
+        if (playerInRange && !isUnlocked && Input.GetKeyDown(KeyCode.F))
         {
             UnlockSpell();
         }
