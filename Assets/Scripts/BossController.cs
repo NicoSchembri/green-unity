@@ -296,6 +296,7 @@ public class BossController : MonoBehaviour
     public void ActivateBoss()
     {
         isActive = true;
+        StopFighting();
         healthUI?.ShowBossUI();
     }
 

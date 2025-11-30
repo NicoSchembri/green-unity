@@ -32,7 +32,10 @@ public class BossActivationZone : MonoBehaviour
     private IEnumerator ActivateBossSequence()
     {
         if (boss != null)
+        {
             boss.ActivateBoss();
+            boss.StopFighting(); 
+        }
 
         if (dialogueManager != null)
             yield return StartCoroutine(dialogueManager.PlayIntroDialogue());
