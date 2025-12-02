@@ -20190,7 +20190,7 @@ MonoBehaviour:
   dialogueLines:
   - 'Raccoon: Looks like you''re pretty skilled after all.'
   - To your right there is your first spell! A FIREBALL
-  - press ENTER at the spellbook to learn it.
+  - press F at the spellbook to learn it.
   - This is the first spell I'm teaching you.
   - 'Frog: So how do I use it?'
   - 'Raccoon: Press the E key to use the fireball'
